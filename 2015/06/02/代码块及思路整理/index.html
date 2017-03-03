@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>代码块及思路整理 | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      代码块及思路整理
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<ol>
+<li><p>给a标签设置一个onclick=”return false;” 阻止其跳转</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--给a标签设置一个onclick="return false;" 阻止其跳转--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://baidu.com"</span>&gt;</span>百度<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--给浏览器返回一个false就可以阻止跳转了--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://baidu.com"</span> <span class="attr">onclick</span>=<span class="string">"return false;"</span>&gt;</span>通过JS阻止默认行为<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--此时不跳转--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://baidu.com"</span> <span class="attr">onclick</span>=<span class="string">"return testAge(17);"</span>&gt;</span>未满十八岁请走开<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--此时不跳转--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"http://baidu.com"</span> <span class="attr">onclick</span>=<span class="string">"return testAge(18);"</span>&gt;</span>满十八岁请进开<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="comment">&lt;!--此时跳转--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">testAge</span>(<span class="params">age</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (age &gt;= <span class="number">18</span>) &#123;</div><div class="line">            alert(<span class="string">"欢迎"</span>);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            alert(<span class="string">"走开"</span>);</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="comment">//必须是返回false 浏览器才认识 其他的 0、""、null、undefined都不行</span></div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>京东搜索框，没有输入任何东西时，失去焦点自动设置输入框中的值为默认；若输入框中的值是默认的，则获取焦点清空输入框。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"txt"</span> <span class="attr">value</span>=<span class="string">"金融"</span> <span class="attr">class</span>=<span class="string">"cls"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> txt = <span class="built_in">document</span>.getElementById(<span class="string">"txt"</span>);</div><div class="line"></div><div class="line">    <span class="comment">//如果输入框里是金融，且类名为cls，此时获取焦点时要清空</span></div><div class="line">    txt.onfocus = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.value === <span class="string">"金融"</span> &amp;&amp; <span class="keyword">this</span>.className === <span class="string">"cls"</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.value = <span class="string">""</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">//如果输入框中没有任何内容，失去焦点时，要在输入框中显示金融</span></div><div class="line">    <span class="comment">//设置类名为cls，为获取焦点时清空输入框做准备</span></div><div class="line">    txt.onblur = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.value === <span class="string">""</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.value = <span class="string">"金融"</span>;</div><div class="line">            <span class="keyword">this</span>.className = <span class="string">"cls"</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">//按键抬起时，如果输入框中的内容不为空，则将它的类名清空</span></div><div class="line">    <span class="comment">//即获取焦点时输入框中的内容不再清空</span></div><div class="line">    txt.onkeyup = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.value !== <span class="string">""</span>) &#123;</div><div class="line">            <span class="keyword">this</span>.className = <span class="string">""</span>;</div><div class="line">        &#125; </div><div class="line">    &#125;;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>排他思想</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"box"</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"hd"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"current"</span>&gt;</span>体育<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>娱乐<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>新闻<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>综合<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"bd"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ul</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">li</span> <span class="attr">class</span>=<span class="string">"current"</span>&gt;</span>我是体育模块<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是娱乐模块<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是新闻模块<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">li</span>&gt;</span>我是综合模块<span class="tag">&lt;/<span class="name">li</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> box = <span class="built_in">document</span>.getElementById(<span class="string">"box"</span>);</div><div class="line">    <span class="keyword">var</span> spans = box.getElementsByTagName(<span class="string">"span"</span>);</div><div class="line">    <span class="keyword">var</span> lis = box.getElementsByTagName(<span class="string">"li"</span>);</div><div class="line">    <span class="comment">// 点击 上面的标签 要排他</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; spans.length; i++) &#123;</div><div class="line">        spans[i].index = i;<span class="comment">//自定义属性</span></div><div class="line">        spans[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="comment">//干掉所有人</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; spans.length; j++) &#123;</div><div class="line">                spans[j].className = <span class="string">""</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//留下我自己</span></div><div class="line">            <span class="keyword">this</span>.className = <span class="string">"current"</span>;</div><div class="line">            <span class="keyword">var</span> index = <span class="keyword">this</span>.index;</div><div class="line">            <span class="comment">//干掉所有人</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; lis.length; k++) &#123;</div><div class="line">                lis[k].className = <span class="string">""</span>;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">//留下对应的</span></div><div class="line">            lis[index].className = <span class="string">"current"</span>;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>自定义属性优化<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> box = <span class="built_in">document</span>.getElementById(<span class="string">"box"</span>);</div><div class="line">    <span class="keyword">var</span> spans = box.getElementsByTagName(<span class="string">"span"</span>);</div><div class="line">    <span class="keyword">var</span> lis = box.getElementsByTagName(<span class="string">"li"</span>);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; spans.length; i++) &#123;</div><div class="line">        spans[i].setAttribute(<span class="string">"index"</span>, i);</div><div class="line">        spans[i].onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; spans.length; j++) &#123;</div><div class="line">                spans[j].removeAttribute(<span class="string">"class"</span>);</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">this</span>.setAttribute(<span class="string">"class"</span>, <span class="string">"current"</span>);</div><div class="line">            <span class="keyword">var</span> index = <span class="keyword">this</span>.getAttribute(<span class="string">"index"</span>);</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> k = <span class="number">0</span>; k &lt; lis.length; k++) &#123;</div><div class="line">                lis[k].removeAttribute(<span class="string">"class"</span>);</div><div class="line">            &#125;</div><div class="line">            lis[index].setAttribute(<span class="string">"class"</span>, <span class="string">"current"</span>);</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-06-02T01:12:15.000Z" itemprop="datePublished">2015-06-02</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="代码块及思路整理" data-title="代码块及思路整理" data-url="http://yoursite.com/2015/06/02/代码块及思路整理/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

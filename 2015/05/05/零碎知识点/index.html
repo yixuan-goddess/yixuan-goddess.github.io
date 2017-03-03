@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>前端学习中的零碎知识点 | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      前端学习中的零碎知识点
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h3 id="在首页中引用样式表"><a href="#在首页中引用样式表" class="headerlink" title="在首页中引用样式表"></a>在首页中引用样式表</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/base.css"</span>/&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"css/index.css"</span>/&gt;</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意引用的顺序，base是公共样式，index是特定样式，特定网页的样式应该放在公共样式后面，以便对其进行覆盖常见布局</p>
+</blockquote>
+<h3 id="布局方式"><a href="#布局方式" class="headerlink" title="布局方式"></a>布局方式</h3><ol>
+<li>固定布局 Fixed Layout</li>
+<li>响应式布局 Responsive Layout<ul>
+<li>流式布局   Fluid Layout</li>
+<li>栅格布局   Grid Layout</li>
+<li>瀑布流布局 Waterfall Layout</li>
+<li>圣杯布局   Holy Grail Layout:也称为双飞翼布局，特点是中间变化两边固定</li>
+</ul>
+</li>
+</ol>
+<h3 id="清除浮动"><a href="#清除浮动" class="headerlink" title="清除浮动"></a>清除浮动</h3><ol>
+<li>什么是清除浮动<ul>
+<li>清除浮动，其实是清除当前元素周围的浮动元素，但是当前元素又不能影响别人，打不赢就跑，所以自己去下面独占一行了。</li>
+<li>不浮动 float: none;</li>
+<li>clear: left/right/both; //清除左/右/全部 浮动</li>
+</ul>
+</li>
+<li>为什么要清除浮动  <ul>
+<li>在布局的时候我们经常希望某些内容能够水平排布，水平排布后，由于内部内容不确定，高度不能简单的给一个定值。而如果不给高度，子元素又都浮动了，父盒子就会因为没有子盒子的支撑而塌陷。</li>
+<li>利用清除浮动的这个特性，我们可以给父元素中最后一个不浮动的盒子使用 <code>clear:both;</code> 从而把父盒子的高度撑起来，并且能够根据内部内容的变化而改变高度。</li>
+</ul>
+</li>
+<li><p>清除浮动的方式</p>
+<ul>
+<li>额外标签法<ul>
+<li>原理：单独使用一个标签加上clear:both跑到浮动元素下面，从而消除子盒子浮动造成的父盒子塌陷。</li>
+<li>优点：通俗易懂，容易掌握</li>
+<li>缺点：添加很多无意义的空标签，不符合结构与表现分离的原则，不利于后期维护</li>
+</ul>
+</li>
+<li>父元素设置 <code>overflow：hidden</code><ul>
+<li>原理：让父盒子形成BFC，BFC的特性之一就是可以承载浮动元素</li>
+<li>优点：不存在结构和语义化问题，代码量极少缺点：内容增多时候容易造成不会自动换行导致内容被隐藏掉，无法显示需要溢出的元素</li>
+</ul>
+</li>
+<li><p>单伪元素</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">.clearfix:after &#123;</div><div class="line">  content: "";</div><div class="line">  height: 0;</div><div class="line">  visibility: hidden;</div><div class="line">  overflow: hidden;</div><div class="line">  dispaly: block; /*不是inline就行*/</div><div class="line">  clear: both;</div><div class="line">&#125;</div><div class="line">.clearfix &#123;</div><div class="line">  *zoom: 1; /*IE67*/</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>双伪元素</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">.clearfix:before, .clearfix:after &#123;</div><div class="line">  content: "";</div><div class="line">  display: table;/*不是inline就行*/</div><div class="line">&#125;/*在有该类的元素内部元素的前面和后面添加元素*/</div><div class="line">.clearfix:after &#123;</div><div class="line">  clear: both;</div><div class="line">&#125;/*只要after两侧有浮动元素，after就会跑到最下面，从而撑开带有该类名的父盒子*/</div><div class="line">.clearfix &#123;</div><div class="line">  *zoom: 1;</div><div class="line">&#125; /*用于兼容IE/7/6*/</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>注：<br>用display:table是因为display:block伪元素仍然有宽度<br>加了一个before是为了防止外边距合并<br>通常说的清除浮动，指的是闭合浮动，即：清除子元素的浮动对父元素造成的影响。</p>
+</blockquote>
+<h3 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h3><ul>
+<li>block formatting content</li>
+<li><p>块格式化上下文，是w3c规定的一种独立渲染区域</p>
+</li>
+<li><p>特性为</p>
+<ul>
+<li>BFC 会阻止外边距折叠</li>
+<li>BFC 可以承载浮动的元素</li>
+<li>BFC 可以阻止元素被浮动元素覆盖</li>
+</ul>
+</li>
+<li>触发BFC的情况：<ul>
+<li>float 除了none以外的值（left，right）</li>
+<li>overflow 除了visible 以外的值（hidden，auto，scroll）</li>
+<li>display (table-cell，table-caption，inline-block)</li>
+<li>position（absolute，fixed）</li>
+<li>根元素</li>
+</ul>
+</li>
+</ul>
+<h3 id="圆角"><a href="#圆角" class="headerlink" title="圆角"></a>圆角</h3><ul>
+<li>CSS3属性，用于向元素添加圆角边框<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">border-top-left-radius</span><span class="selector-pseudo">:2px</span>;</div><div class="line"><span class="selector-tag">border-top-right-radius</span><span class="selector-pseudo">:2px</span>;</div><div class="line"><span class="selector-tag">border-bottom-right-radius</span><span class="selector-pseudo">:2px</span>;</div><div class="line"><span class="selector-tag">border-bottom-left-radius</span><span class="selector-pseudo">:2px</span>;</div><div class="line"><span class="selector-tag">border-radius</span><span class="selector-pseudo">:2px</span>;<span class="comment">/*为简写形式，等价于以上代码顺序从左上角开始顺时针设置*/</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<blockquote>
+<p>例如，一个盒子的 <code>width: 10px;</code>  设置 <code>border-top-left-radius:10px;</code><br>结果是半径为10px的1/4圆，左上角是圆弧。<br>如果设置 <code>border-radius:5px;</code> 结果是直径为10px的圆。</p>
+</blockquote>
+<h3 id="网页构建策略"><a href="#网页构建策略" class="headerlink" title="网页构建策略"></a>网页构建策略</h3><blockquote>
+<p>两种网站构建策略：<br><strong>渐进增强</strong> progressive enhancement：先针对低版本浏览器做基本功能，再针对高版本浏览器去美化和增强。此策略一般用于PC端（PC端仍然有很多老版本浏览器）;<br><strong>优雅降级</strong> graceful degradation：先针对高版本浏览器做最完整的功能，再针对低版本的浏览器进行修补，此策略一般用于移动端（移动端浏览器普遍比较新）;</p>
+</blockquote>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-05-05T04:30:21.000Z" itemprop="datePublished">2015-05-05</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="零碎知识点" data-title="前端学习中的零碎知识点" data-url="http://yoursite.com/2015/05/05/零碎知识点/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

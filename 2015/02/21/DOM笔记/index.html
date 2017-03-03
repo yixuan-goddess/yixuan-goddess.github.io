@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>DOM笔记 | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      DOM笔记
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h2 id="DOM笔记"><a href="#DOM笔记" class="headerlink" title="DOM笔记"></a>DOM笔记</h2><h3 id="内容概念"><a href="#内容概念" class="headerlink" title="内容概念"></a>内容概念</h3><ul>
+<li><strong>文档</strong>(Document)：就是指HTML或者XML文件；</li>
+<li><strong>节点</strong>(Node)：HTML文档中的所有内容都可以称之为节点，常见的节点有：<ul>
+<li>元素节点</li>
+<li>属性节点</li>
+<li>文本节点</li>
+<li>注释节点</li>
+</ul>
+</li>
+<li><strong>元素</strong>(Element)：HTML文档中的<strong>标签</strong>可以称为元素</li>
+</ul>
+<h3 id="获取元素"><a href="#获取元素" class="headerlink" title="获取元素"></a>获取元素</h3><p><code>getElementById();</code>//通过id获取元素(只能被document调用)</p>
+<p><code>getElementsByTagName();</code>//通过标签名获取元素，返回一个由元素对象组成的伪数组(既可以被document调用，又可以被元素对象调用，被元素对象调用时表示在该元素对象内部执行查找)</p>
+<p><code>getElementsByClassName();</code>//通过类名获取元素，返回一个由元素对象组成的伪数组。IE6、7、8有兼容问题(既可以被document调用，又可以被元素对象调用，被元素对象调用时表示在该元素对象内部执行查找)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//封装 通过类名获取元素 的兼容函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getElementsByClassName</span>(<span class="params">element,className</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(element.getElementsByClassName) &#123;<span class="comment">//如果支持，直接返回</span></div><div class="line">        <span class="keyword">return</span> element.getElementsByClassName(className);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//寻找指定元素内部所有的标签 一个一个标签去判断</span></div><div class="line">        <span class="comment">//如果符合要求 就放到一个数组里 最后返回这个数组</span></div><div class="line">        <span class="keyword">var</span> filterArr = [];</div><div class="line">        <span class="keyword">var</span> elements = element.getElementsByTagName(<span class="string">"*"</span>);</div><div class="line">        <span class="comment">//把每个标签取出来一个一个判断类名是否符合要求</span></div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; elements.length; i++) &#123;</div><div class="line">            <span class="keyword">var</span> nameArr = elements[i].className.split(<span class="string">" "</span>);</div><div class="line">            <span class="comment">//遍历类名数组 看看有没有和className相等的类名</span></div><div class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; nameArr.length; j++) &#123;</div><div class="line">                <span class="comment">//nameArr[j]//每一个类名</span></div><div class="line">                <span class="keyword">if</span>(nameArr[j] === className) &#123;<span class="comment">//当前元素是我要的</span></div><div class="line">                    filterArr.push(elements[i]);<span class="comment">//把当前元素放入数组</span></div><div class="line">                    <span class="keyword">break</span>;<span class="comment">//跳出对当前元素的类名的数组的循环</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> filterArr;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="设置属性"><a href="#设置属性" class="headerlink" title="设置属性"></a>设置属性</h3><p><code>元素对象.属性名 = &quot;属性值&quot;;</code></p>
+<p>等价于： </p>
+<p><code>&lt;标签 属性名=&quot;属性值&quot;&gt;</code></p>
+<h3 id="绑定事件"><a href="#绑定事件" class="headerlink" title="绑定事件"></a>绑定事件</h3><p>事件三要素:</p>
+<p><code>事件源.事件 = function () { 事件处理程序 };</code></p>
+<p>等价于:</p>
+<p><code>&lt;标签  事件 = &quot;事件处理程序&quot;&gt;</code></p>
+<h3 id="内部文本属性"><a href="#内部文本属性" class="headerlink" title="内部文本属性"></a>内部文本属性</h3><ol>
+<li><code>innerHTML;</code> //获取和设置标签中的内容。<ul>
+<li>设置的时候，如果如果是符合标签规则的文本 会设置成标签。即设置的内容会当作节点对象被解析到DOM树上。</li>
+<li>调用方式：<code>element.innerHTML = &quot;content&quot;;</code></li>
+<li><code>box.innerHTML = &quot;&lt;li&gt;1&lt;/li&gt;&quot;;</code>//直接当做li标签，页面上只显示 ·1</li>
+</ul>
+</li>
+<li><code>innerText //获取和设置标签中的内容，设置的内容不管是否是符合标签规则的文本，都会被当作普通文本。有兼容问题，用textContent代替</code></li>
+</ol>
+<p>调用方式：<code>element.innerText = &quot;content&quot;</code></p>
+<p><code>box.innerText = &quot;&lt;li&gt;1&lt;/li&gt;&quot;;//页面上输出&lt;li&gt;1&lt;/li&gt;</code></p>
+<p>通过<strong>能力检测</strong>封装一个自己的设置内部文本的方法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//设置内部文本兼容性函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">setInnerText</span>(<span class="params">element,content</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> element.innerText === <span class="string">"String"</span>) &#123;</div><div class="line">        element.innerText = content;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        element.textContent = content;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取内部文本的兼容性函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getInnerText</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="keyword">typeof</span> element.innerText === <span class="string">"String"</span>) &#123;</div><div class="line">        <span class="keyword">return</span> element.innerText;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> element.textContent;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="常用表单属性"><a href="#常用表单属性" class="headerlink" title="常用表单属性"></a>常用表单属性</h3><ul>
+<li>常见的表单元素属性有： type、value、checked、selected、disabled<ul>
+<li>type：可以设置input元素的类型</li>
+<li>value：可以设置input元素的值</li>
+<li>checked：可以设置input元素是否选中</li>
+<li>selected：可以设置下拉列表select中的option是否被选中</li>
+<li>disabled：可以设置input元素是否被禁用</li>
+</ul>
+</li>
+<li><strong>文本框获取焦点和失去焦点</strong><ul>
+<li>获取焦点 事件是onfocus</li>
+<li>失去焦点 事件是onblur  (不是所有的标签都有这个事件)</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义属性"><a href="#自定义属性" class="headerlink" title="自定义属性"></a>自定义属性</h3><ul>
+<li>w3c规定的属性 标签和对象会相互影响 没规定的各自是各自的<ul>
+<li>标签中有规定的属性 会反映到对象上</li>
+<li>标签中没有规定的属性 不会反映到对象上</li>
+<li>标签中有规定的属性 在对象身上修改 会影响标签</li>
+<li>标签中没有规定的属性 在对象身上修改 不会影响标签</li>
+</ul>
+</li>
+</ul>
+<p><code>getAttribute();</code>//设置标签属性</p>
+<p><code>setAttribute();</code>//获取标签属性</p>
+<p><code>removeAttribute();</code>//移除标签属性</p>
+<h3 id="节点-node"><a href="#节点-node" class="headerlink" title="节点(node)"></a>节点(node)</h3><ol>
+<li>节点类型<ul>
+<li>node.nodeType;//返回数字</li>
+<li>1：表示元素节点；</li>
+<li>2：表示属性节点；</li>
+<li>3：表示文本节点；</li>
+<li>8：表示注释节点；</li>
+</ul>
+</li>
+<li>节点名称<ul>
+<li>node.nodeName;//节点名称（标签名）</li>
+</ul>
+</li>
+<li>节点值<ul>
+<li>node.nodeValue;//元素节点的nodeValue始终是null</li>
+</ul>
+</li>
+<li>节点层次<ul>
+<li>所有获取节点相关属性都没有兼容性问题</li>
+<li>childNodes //子节点</li>
+<li>children //子元素  所有浏览器都支持</li>
+<li>nextSibling //下一个兄弟<strong>节点</strong></li>
+<li>nextElementSibling //下一个兄弟<strong>元素</strong> 有兼容性问题</li>
+<li>previousSibling//上一个兄弟<strong>节点</strong></li>
+<li>previousElementSibling //上一个兄弟<strong>元素</strong> 有兼容性问题</li>
+<li>firstChild //第一个<strong>节点</strong></li>
+<li>firstElementChild //第一个子<strong>元素</strong> 有兼容性问题</li>
+<li>lastChild //最后一个子<strong>节点</strong></li>
+<li>lastElementChild //最后一个子<strong>元素</strong> 有兼容性问题</li>
+<li>parentNode //父节点 （一定是元素节点，所以无需处理）</li>
+</ul>
+</li>
+</ol>
+<p>封装函数来解决兼容性问题<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取下一个兄弟元素</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getNextElementSibling</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="comment">//能力检测</span></div><div class="line">    <span class="keyword">if</span>(element.nextElementSibling) &#123;</div><div class="line">        <span class="keyword">return</span> element.nextElementSibling;<span class="comment">//如果有，直接返回</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//下一个兄弟节点 这是所有浏览器都支持的</span></div><div class="line">        <span class="keyword">var</span> next = element.nextSibling;</div><div class="line">        <span class="comment">//循环条件：有下一个子节点 并且类型不是想要的</span></div><div class="line">        <span class="keyword">while</span>(next &amp;&amp; next.nodeType !== <span class="number">1</span>) &#123;</div><div class="line">            next = next.nextSibling;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> next;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取上一个兄弟元素</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPreviousElementSibling</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="comment">//能力检测</span></div><div class="line">    <span class="keyword">if</span>(element.previousElementSibling) &#123;</div><div class="line">        <span class="keyword">return</span> element.previousElementSibling;<span class="comment">//如果有，直接返回</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//上一个兄弟节点 这是所有浏览器都支持的</span></div><div class="line">        <span class="keyword">var</span> node = element.previousSibling;</div><div class="line">        <span class="comment">//循环条件：有上一个子节点 并且类型不是想要的</span></div><div class="line">        <span class="keyword">while</span>(node &amp;&amp; node.nodeType !== <span class="number">1</span>) &#123;</div><div class="line">            node = node.previousSibling;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取节点的第一个子元素</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getFirstElement</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(element.firstElementChild) &#123;</div><div class="line">        <span class="keyword">return</span> element.firstElementChild;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> node = element.firstChild;</div><div class="line">        <span class="keyword">while</span>(node &amp;&amp; <span class="number">1</span> != node.nodeType) &#123;</div><div class="line">            node = node.nextSibling;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//获取节点的最后一个子元素</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getLastElement</span>(<span class="params">element</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(element.lastElementChild) &#123;</div><div class="line">        <span class="keyword">return</span> element.lastElementChild;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">var</span> node = element.lastChild;</div><div class="line">        <span class="keyword">while</span>(node &amp;&amp; <span class="number">1</span> != node.nodeType) &#123;</div><div class="line">            node = node.previousSibling;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> node;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h3><ul>
+<li>onmouseover:鼠标经过</li>
+<li>onmouseout:鼠标离开</li>
+<li>onclick:点击</li>
+<li>onkeyup:键盘弹起</li>
+<li>onkeydown:键盘按下</li>
+<li>onfocus:文本框获取焦点</li>
+<li>onblur:文本框失去焦点</li>
+</ul>
+<blockquote>
+<p>调用方式：<code>btn.onclick = function() { 事件处理程序 };</code></p>
+</blockquote>
+<h3 id="样式属性"><a href="#样式属性" class="headerlink" title="样式属性"></a>样式属性</h3><blockquote>
+<ul>
+<li>style属性是对象，style对象的属性是字符串</li>
+<li>style只能获取和设置<strong>行内样式</strong></li>
+<li>DOM对象中style的属性和标签中style内的值几乎一样</li>
+<li>只是带有 - 的属性名较为特殊（如background-color变成了backgroundColor），因为在JS中 - 不能作为标识符</li>
+</ul>
+</blockquote>
+<ol>
+<li><strong>设置和获取样式</strong><ul>
+<li>通过对象的style属性只能设置和获取<strong>行内样式</strong></li>
+<li>获取样式的时候 如果行内没有该样式 输出空字符串</li>
+<li>设置样式的时候 赋的值是一个字符串 如果这个属性有单位 一定要记得加单位</li>
+<li>style对象 对应的是行内样式</li>
+<li>获取样式</li>
+<li>只能获取行内样式 获取到的是字符串 只有属性值 会带有单位</li>
+<li>设置样式</li>
+<li>设置的是行内样式(注意路径问题) 设置的也是字符串 一定要记得加单位 只设置值即可</li>
+</ul>
+</li>
+<li>常用属性<ul>
+<li>backgroundColor</li>
+<li>backgroundImage</li>
+<li>color</li>
+<li>width</li>
+<li>height</li>
+<li>border</li>
+<li>opacity (IE8以前filter: alpha(opacity=xx))//透明度</li>
+<li>position</li>
+<li>left</li>
+<li>top</li>
+<li>right</li>
+<li>bottom</li>
+<li>z-index//层级（设置层级时，一定要先设置定位）</li>
+<li>display//元素隐藏后，<strong>不占位置</strong>，页面上的元素会重新排列<ul>
+<li>取值：none/block</li>
+</ul>
+</li>
+<li>visibility//元素隐藏后，<strong>占位置</strong><ul>
+<li>取值：hidden/visible</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>什么情况通过class</strong> <strong>控制样式</strong>？<strong>什么情况通过style</strong> <strong>控制样式</strong>？<ul>
+<li>不严格的说：<ul>
+<li>如果样式很多，通过 直接控制类名 的方式加样式</li>
+<li>如果样式比较少，通过直接设置比较方便</li>
+</ul>
+</li>
+<li>严格来说：<ul>
+<li>从标准的角度讲，即使是样式比较少的时候，设置样式也要用类名</li>
+<li>但是有一类情况，是无论如何也必须直接通过JS加的–那就是涉及到计算的时候</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="动态创建元素"><a href="#动态创建元素" class="headerlink" title="动态创建元素"></a>动态创建元素</h3><ol>
+<li>插入和移除节点<ul>
+<li>克隆节点<ul>
+<li><code>克隆的节点.cloneNode(布尔值);</code>//参数为布尔值，false表示浅度克隆，即只克隆当前节点；true表示深度克隆，即把此节点的所有子节点一起克隆</li>
+</ul>
+</li>
+<li>在父元素中的最后追加子元素<ul>
+<li><code>father.appendChild(要追加的节点对象);</code>//如果要追加的节点对象是已经存在的，则将该已存在的节点对象从原位置删除，放到要追加的位置；如果要追加的节点对象是克隆出来的，则原节点对象在原位置不变，只把克隆出来的节点对象放到要追加的位置。</li>
+</ul>
+</li>
+<li>在父元素中的某个子元素前面插入子元素<ul>
+<li><code>father.insertBefore(要插入的节点对象,插到这个节点对象的前面);</code>//如果要追加的节点对象是已经存在的，则将该已存在的节点对象从原位置删除，放到要追加的位置；如果要追加的节点对象是克隆出来的，则原节点对象在原位置不变，只把克隆出来的节点对象放到要追加的位置。</li>
+</ul>
+</li>
+<li>从父元素中移除子元素<ul>
+<li><code>father.removeChild(要移除的子节点对象);</code></li>
+</ul>
+</li>
+<li><strong>清空父元素</strong><ul>
+<li><code>father.innerHTML=&quot;&quot;</code>;//在清空内容的时候和事件相关的函数不会被销毁，任然遗留在内存中</li>
+<li>因此如果方便的话，建议使用<code>father.removeChild(son)</code>来清除</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>动态创建结构<ul>
+<li>方式一：直接在文档中书写<ul>
+<li><code>document.write(&quot;内容&quot;);</code>//如果页面已经加载好了 会把所有内容都干掉。write方法无法限定范围，只能被document调用.</li>
+</ul>
+</li>
+<li>方式二：改变元素对象内部的HTML<ul>
+<li><code>innerHTML = &quot;内容&quot;;</code>//可以限定范围。如果页面已经加载好了，会把所有内容都干掉。</li>
+<li>调用方式：<code>element.innerHTML = &quot;content&quot;;</code></li>
+<li>innerText//可以限定范围,有兼容问题，用textContent代替(兼容函数见第58行)</li>
+<li>调用方式：<code>element.innerText = &quot;content&quot;</code></li>
+</ul>
+</li>
+<li>方式三：创建或克隆节点并追加<ul>
+<li><code>createElement(tagName);</code></li>
+<li><code>cloneNode();</code></li>
+<li>然后appendChild()将节点追加到后面或者insertBefore()将节点插入到指定位置</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>通过这两种方法创建出来的元素只是保存在内存中，必须放到页面上才行!</strong></p>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-02-21T08:23:49.000Z" itemprop="datePublished">2015-02-21</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="DOM笔记" data-title="DOM笔记" data-url="http://yoursite.com/2015/02/21/DOM笔记/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

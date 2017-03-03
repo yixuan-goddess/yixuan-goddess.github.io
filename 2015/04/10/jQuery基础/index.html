@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>jQuery学习笔记 | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      jQuery学习笔记
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h3 id="为什么学jQuery"><a href="#为什么学jQuery" class="headerlink" title="为什么学jQuery"></a>为什么学jQuery</h3><ol>
+<li>jQuery是什么<br> jQuery是JS的一个库，封装了开发过程中常用的功能，能够提高开发效率。<br> JS库就是把常用的代码放到一个单独的文件中，用的时候直接引用到页面里面就可以了。</li>
+<li>使用jQuery<br> 使用步骤：<pre><code>1.引包；2.写入口函数；3.实现功能（事件处理）；
+入口函数就是指程序运行的时候最开始调用的函数，也就是程序开始的地方。
+</code></pre></li>
+</ol>
+<h3 id="使用jQuery"><a href="#使用jQuery" class="headerlink" title="使用jQuery"></a>使用jQuery</h3><ol>
+<li>版本介绍<br> 最常用的两个版本：<br> 1.12.x和最新推出的3.0.0<pre><code>3.0版本不支持IE6/7/8
+PC端的开发主要使用1.12.x版本
+</code></pre> 未压缩版（开发版）：代码可读性高，推荐在开发和学习环境中使用，方便查看源代码；<br> 压缩版：去除了注释、换行、空格，并且将一些变量替换成了a,b,c之类的简单字符，基本没有可读性。推荐在生产和测试环境中使用，因为文件较小，减少网络压力。</li>
+<li>引包注意<ul>
+<li>在使用jQuery之前，先把jQuery文件引到页面中来，如果在使用jQuery之前，没有引用jQuery文件，会报错；</li>
+<li>src路径一定要写正确 如果src路径写错，也会报错</li>
+</ul>
+</li>
+<li>入口函数<br> jQuery入口函数<pre><code>第一种：`$(document).ready(function() {函数主体});`
+第二种：`$(function(){函数主体});`
+以上两种写法，作用完全相同，用哪个都可以。
+</code></pre> JS的入口函数<pre><code>`window.onload = function(){函数主体};`
+</code></pre> jQuery入口函数和JS入口函数的区别<ul>
+<li>书写个数不同<br>  JS入口函数<strong>只能出现一次</strong>，出现多次会存在事件覆盖的问题。<br>  jQuery的入口函数，可以出现任意多次，<strong>不会覆盖</strong>。</li>
+<li>执行时机不同<br>  JS入口函数是在<strong>所有资源加载完成后，才执行</strong>。（包括：页面、外部js文件、外部css文件、图片等）<br>  jQuery入口函数，是在<strong>文档加载完成后就执行</strong>。文档加载完成指的是：DOM树加载完成后，就可以操作DOM了，不用等到所有的外部资源都加载完成。</li>
+</ul>
+</li>
+<li>$符号<br> <strong>$ 就是一个普通的字符</strong>，可以用于变量名或函数名<br> JS命名规范允许出现的字符有：数字、字母、下划线、$。</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $ = <span class="string">"字符串"</span>;</div><div class="line"><span class="keyword">var</span> $ = <span class="number">123</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">$</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    alert(<span class="string">"我是函数'$'"</span>);</div><div class="line">&#125;</div><div class="line">$(); <span class="comment">// 调用上面我们自定义的函数$</span></div></pre></td></tr></table></figure>
+<pre><code>**jQuery中的$实际是一个函数**
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// jQuery中使用$的主要场景</span></div><div class="line">$(<span class="built_in">document</span>）.ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;); <span class="comment">// 调用入口函数</span></div><div class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;); <span class="comment">// 调用入口函数</span></div><div class="line">$(<span class="string">"#btnShow"</span>) <span class="comment">// 获取id属性为btnShow的元素</span></div><div class="line">$(<span class="string">"div"</span>) <span class="comment">// 获取所有的div元素</span></div></pre></td></tr></table></figure>
+
+注意：
+    jQuery里面的$函数，根据传入参数的不同，进行不同的调用，实现不同的功能。返回的是jQuery对象
+    jQuery这个JS库，为了避免冲突，给这个最重要的$函数还起了另外一个名字：jQuery
+    jQuery函数跟$函数的关系：jQuery === $;
+</code></pre><h3 id="jQuery对象"><a href="#jQuery对象" class="headerlink" title="jQuery对象"></a>jQuery对象</h3><ol>
+<li>jQuery对象与DOM对象<br> <strong>DOM对象</strong>此处指的是：使用JS操作DOM的方法返回的对象<br> <code>var btn = document.getElementById(“btnShow”); //普通的DOM对象</code><br> <strong>jQuery对象</strong>此处指的是：使用jQuery操作DOM的方法返回的对象<br> <code>var $btn = $(“#btnShow”); // Query的DOM对象</code><br> jQuery拿到普通的DOM对象后会对其进行包装，让其成为具有jQuery方法的jQuery对象</li>
+<li>jQuery对象转DOM对象<br> 第一种方式<br> <code>var btn1 = $btn[0];</code> //通过索引的方式把DOM对象取出来（推荐使用此方式）<br> 第二种方式<br> <code>var btn2 = $btn.get(0);</code>//调用get()方法也可以<br> 这两种方式使用哪一种都可以</li>
+<li>DOM对象转jQuery对象<br> $(普通的DOM对象) //直接加一个$符号</li>
+</ol>
+<h3 id="jQuery选择器"><a href="#jQuery选择器" class="headerlink" title="jQuery选择器"></a>jQuery选择器</h3><ol>
+<li>JS中选择DOM元素的方法<br> 考虑兼容性的话，JS提供的选择DOM的方法只有两个：<br> <code>document.getElementById();</code>//通过id属性获取指定元素,返回唯一的DOM对象<br> <code>document.getElementsByTagName();</code>//通过标签名获取指定元素,返回DOM对象数组（即使只有一个元素）.</li>
+<li><p>jQuery选择器<br> 基本选择器<br>| 符号（名称）   | 说明           | 用法                                                                                      |<br>| :————: | :————: | :————:                                                                            |<br>| #              | Id选择器       | <code>$(“#btnShow”).css(“color”, “red”);</code>选择id为btnShow的一个元素（返回值为jQuery对象，下同） |<br>| .              | 类名选择器     | <code>$(“.liItem”).css(“color”, “red”);</code>选择含有类liItem的所有元素                             |<br>| 标签名         | 标签选择器     | <code>$(“li”).css(“color”, “red”);</code>选择标签名为li的所有元素                                    |<br>| ,隔开          | 并集选择器     | <code>$(“div,p,li”).css(“color”, “red”);</code>div、p、li都会被选中                                  |<br>| 紧挨着         | 交集选择器     | <code>$(“li.current”).css(“color”, “red”);</code>选择标签名为li并且类名为current的元素               |</p>
+<pre><code>|
+</code></pre><p> 层级选择器<br>| 符号（名称）   | 说明           | 用法                                                                                          |<br>| :————: | :————: | :————:                                                                                |<br>| 空格           | 后代选择器     | <code>$(“#j_wrap li”).css(“color”, “red”);</code>选择id为j_wrap的元素的所有后代元素li                    |<br>| &gt;              | 子代选择器     | <code>$(“#j_wrap &gt; ul &gt; li”).css(“color”, “red”);</code>选择id为j_wrap的元素的所有子元素ul的所有子元素li |</p>
+<p> <strong>常用的过滤选择器</strong><br>| 符号（名称）   | 说明                                                | 用法                                                                 |<br>| :————: | :————:                                      | :————:                                                       |<br>| :eq(index)     | 选择匹配元素中索引号为index的一个元素，index从0开始 | <code>$(“li:eq(2)”).css(“color”, ”red”);</code>选择li元素中索引号为2的一个元素  |<br>| :odd           | 选择匹配元素中索引号为奇数的所有元素，index从0开始  | <code>$(“li:odd”).css(“color”, “red”);</code>选择li元素中索引号为奇数的所有元素 |<br>| :even          | 选择匹配元素中索引号为偶数的所有元素，index从0开始  | <code>$(“li:odd”).css(“color”, “red”);</code>选择li元素中索引号为偶数的所有元素 |</p>
+<p> 筛选选择器（都是方法）<br>| 符号（名称）       | 说明                                                | 用法                                                                             |<br>| :————:     | :————:                                      | :————:                                                                   |<br>| find(selector)     | 查找指定元素的所有后代元素（子子孙孙）              | $(“#j_wrap”).find(“li”).css(“color”, “red”);选择id为j_wrap的所有后代元素         |<br>| children(selector) | 查找指定元素的直接子元素（亲儿子元素）              | <code>$(“#j_wrap”).children(“ul”).css(“color”, “red”);</code>选择id为j_wrap的所有子代元素ul |<br>| siblings(selector) | 查找所有其他的兄弟元素（不包括自己）                | <code>$(“#j_liItem”).siblings().css(“color”, “red”);</code>选择id为j_liItem的所有兄弟元素   |<br>| next(selector)     | 查找下一个兄弟元素                                  | <code>$(“#j_liItem”).next().css(“color”, “red”);</code>选择id为j_liItem的下一个兄弟元素     |<br>| parent(selector)   | 查找父元素（亲的）                                  | <code>$(“#j_liItem”).parent(“ul”).css(“color”, “red”);</code>选择id为j_liItem的父元素       |<br>| eq(index)          | 查找指定元素的第index个元素，index是索引号，从0开始 | <code>$(“li”).eq(2).css(“color”, “red”);</code>选择所有li元素中的第二个                     |</p>
+</li>
+</ol>
+<h3 id="jQuery中的DOM操作"><a href="#jQuery中的DOM操作" class="headerlink" title="jQuery中的DOM操作"></a>jQuery中的DOM操作</h3><ol>
+<li>样式操作</li>
+</ol>
+<ul>
+<li>获取样式<br>  <code>$(selector).css(&quot;font-size&quot;);</code>//参数表示要获取的样式 属性名称，返回”font-size”样式属性对应的值。</li>
+<li>设置样式<br>  设置单个样式：<br>  <code>$(selector).css(&quot;color&quot;,&quot;red&quot;);</code>//属性为：参数名，参数值<br>  设置多个样式<br>  <code>$(selector).css({&quot;color&quot;:&quot;red&quot;,&quot;font-size&quot;:&quot;30px&quot;});</code>//参数为对象</li>
+</ul>
+<ol>
+<li>类名操作<ul>
+<li>为指定元素添加类名 addClass(className);<br><code>$(selector).addClass(&quot;liItem&quot;);</code>//不需要加点，只传名字</li>
+<li>为指定元素移除类名 removeClass(className)<br><code>$(selector).removeClass(“liItem”);</code>//移除指定类名<br><code>$(selector).removeClass();</code> //不指定参数，表示移除所有类名</li>
+<li>判断是否包含某个类名 hasClass(calssName)<br><code>$(selector).hasClass(“liItem”);</code>//返回true或false</li>
+<li>切换类名 toggleClass(className)<br><code>$(selector).toggleClass(“liItem”);</code>//切换类名，如果没有指定类名就添加，有就移除。</li>
+</ul>
+</li>
+<li><p>动画函数</p>
+<ul>
+<li><p>显示隐藏动画<br>show()方法</p>
+<p>  形式一：<br>  // 不带参数，没有动画<br>  $(selector).show();//作用等同于css(“display”, ”block”)</p>
+<p>  形式二：<br>  //参数为数值，表示：执行动画时长<br>  $(selector).show(2000);//单位为毫秒（ms），2000毫秒即2秒</p>
+<p>  形式三：<br>  //参数为字符串，是jQuery预设的值，共有三个，分别是：slow、normal、fast<br>  $(selector).show(“slow”); //slow：600ms、normal：400ms、fast：200ms</p>
+<p>  形式四：<br>  // 参数一可以是数值类型或者字符串类型<br>  // 参数二表示：动画执行完后立即执行的回调函数<br>  $(selector).show(2000, function() {});</p>
+<p>  hide()方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">    $(selector).hide();</div><div class="line">    $(selector).hide(<span class="number">1000</span>); </div><div class="line">    $(selector).hide(“slow”);</div><div class="line">    $(selector).hide(<span class="number">1000</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</div></pre></td></tr></table></figure>
+<p>  显示隐藏切换<br>  <code>$(selector).toggle(speed,callback);</code></p>
+</li>
+</ul>
+</li>
+</ol>
+<pre><code>    jQuery预设的三组动画效果的语法几乎一致：
+    参数可以有两个，第一个是动画的执行时长(可以是指定字符或毫秒)，第二个是动画执行完成后的回调函数。
+
+- 滑入滑出动画
+    滑入效果
+    作用：让元素以下拉动画效果**展示**出来
+    `$(selector).slideDown(speed,callback);`
+    滑出效果
+    作用：让元素以上拉动画效果**隐藏**起来
+    `$(selector).slideUp(speed,callback);`
+    **滑入滑出切换**
+    `$(selector).slideToggle(speed,callback);`
+- 淡入淡出动画
+    **淡入效果**
+    作用：让元素以淡淡的进入视线的方式**展示**出来
+    `$(selector).fadeIn(speed, callback);`
+    **淡出效果**
+    作用：让元素以渐渐消失的方式**隐藏**起来
+    `$(selector).fadeOut(1000);`
+    **淡入淡出切换**
+    作用：通过改变不透明度，切换匹配元素的显示或隐藏状态
+    `$(selector).fadeToggle(&apos;fast&apos;,function(){});`
+    **淡淡达到效果**
+    改变不透明度到某个值
+    `$(selector).fadeTo(0, .5)；`
+    作用：调节匹配元素的不透明度
+
+
+    与淡入淡出的区别：淡入淡出只能控制元素的不透明度从 完全不透明 到完全透明；而fadeTo可以指定元素不透明度的具体值。并且时间参数是必需的！
+    // 用法有别于其他动画效果
+    // 第一个参数表示：时长
+    // 第二个参数表示：不透明度值，取值范围：0-1
+    $(selector).fadeTo(1000, .5); //0全透，1全不透
+    // 第一个参数为0，此时作用相当于：.css(“opacity”, .5);
+    $(selector).fadeTo(0, .5);
+
+- 动画方法总结
+![mark](http://olvlhfr9r.bkt.clouddn.com/blog/20170228/210311396.jpg)
+</code></pre>
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-04-10T13:42:10.000Z" itemprop="datePublished">2015-04-10</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="jQuery基础" data-title="jQuery学习笔记" data-url="http://yoursite.com/2015/04/10/jQuery基础/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

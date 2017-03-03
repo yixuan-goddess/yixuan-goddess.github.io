@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>CSS3学习笔记 | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      CSS3学习笔记
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h3 id="CSS学习笔记"><a href="#CSS学习笔记" class="headerlink" title="CSS学习笔记"></a>CSS学习笔记</h3><ol>
+<li><p>属性选择器</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">   E[att]:包含attr属性，判断是否拥有某个属性</div><div class="line">   E[att=&quot;val&quot;]:属性值为val。属性是否等于val，属性的值 可以写单引号、双引号，也可以省略</div><div class="line">   E[att~=&quot;val&quot;]:属性值使用空格进行分割,有一个为val</div><div class="line">   E[att^=&quot;val&quot;]:属性值以val开头</div><div class="line">   E[att$=&quot;val&quot;]:属性值以val结尾</div><div class="line">   E[att*=&quot;val&quot;]:属性中包含val的属性，可以是单个，也可以是多个。</div><div class="line">   E[att|=&quot;val&quot;]:属性以‘-’分割，其中有val值（如果属性只有val 那么也会被选中哦）</div></pre></td></tr></table></figure>
+</li>
+<li><p>兄弟选择器<br> 作用：选择相邻的兄弟节点<br> 语法：<code>选择器1~选择器2</code><br> 指的是，在相同父元素中，选择器1之后的，所有满足选择器2 的元素。</p>
+</li>
+<li><p>伪类选择器<br> 语法： 一个冒号（：）<br> 注意：</p>
+<pre><code>1.标签E,必须是某个元素的子元素(在界面上)
+2.如果通过`伪类选择器`找到的元素不是`E`则选择无效
+</code></pre> <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">    结构伪类</div><div class="line">    1.下面的这几个方法，如果有其他的兄弟元素，会一并考虑进去</div><div class="line">    E:first-child：第一个子元素</div><div class="line">    E:last-child：最后一个子元素</div><div class="line">    E:nth-child(4): nth-child 如果给的是 索引 是从1开始。nth-child使用的时候，如果前面有其他的元素，也会计算进去索引</div><div class="line">    E:nth-child(n)： 第n个子元素，计算方法是E元素的全部兄弟元素；</div><div class="line">    E:nth-last-child(n)： 跟E:nth-child(n)类似 ，只是倒着计算；</div><div class="line">        其中n的取值范围是：0，1,2,3,4...线性累加</div><div class="line">        可以传入表达式，比如2n,2n+1等等</div><div class="line">        可以传入特殊字符：even(偶数) odd(奇数)</div><div class="line">    2.不考虑兄弟元素的 伪类选择器</div><div class="line">    E:first-of-type：第一个子元素</div><div class="line">    E:last-of-type:最后一个子元素</div><div class="line">    E:nth-of-type(4):索引从1开始，指的是第4个元素，不考虑兄弟元素。</div><div class="line">    E:nth-of-type(n+4):n从0开始。指的是索引第4个以后得所有元素。</div><div class="line">    3.empty选择器</div><div class="line">    E:empty 指的是E标签，并且内容为空（空格、换行也不能有）。</div><div class="line">    4.not选择器</div><div class="line">    E:not(选择器)：指的是，不满足括号内选择器条件的元素E。括号的内部，写的还是选择器。可以写属性选择器,伪类选择器等等。</div><div class="line">    例如：li:not([name])：li标签,没有name属性的全部获取.</div><div class="line">    目标伪类</div><div class="line">    E:target:选中当前锚点</div></pre></td></tr></table></figure>
+</li>
+<li><p>伪元素选择器<br> 作用： 在不改变页面html结构的基础上,为其添加标签<br> 基本的语法为：两个冒号。也可以写一个冒号，但不建议。</p>
+<pre><code>例如，
+::before表示在标签之前； 
+::after表示在标签之后；
+::first-line表示第一行；可以自适应宽度。
+::first-letter表示第一个字母
+::selection表示选中的内容，*   只能设置的属性有`background-color`,`color`,`text-shadow`
+::placeholder 设置`input`标签`placeholder`属性的显示颜色
+注意：设置的是 input标签中的 placeholder属性的样式
+    完全按照标准 但是却无法生效
+    该样式 还处于测试阶段 需要添加一些 前缀
+    可以使用帮助文档 里面的提示 进行编写
+    如果 要兼容老实的浏览器 可以选用 js的方式去写
+        修改value值 以及 style属性
+        获取焦点事件
+        失去焦点事件
+</code></pre><ul>
+<li>content 只要设置了 就能够看到<br>内容不受限制，可以写空字符串</li>
+<li>伪元素是行内元素，为了设置宽高，需要变为块级元素<br><code>display:block;</code><br><code>position:absolute;</code></li>
+<li>伪元素其实相当于是子元素，即普通的行内元素，所以单标签不支持伪元素。</li>
+</ul>
+</li>
+<li>边框圆角<br> border-radius;</li>
+</ol>
+<pre><code>    符合属性，特点：
+    1.给一个值，四边都有圆角；
+    2.给两个值，前面的设置的是左上和右下，后面设置的是右上和左下；
+    3.给三个值，第一个是左上，第二个是右上和左下，第三个是右下；
+    4.给四个值，顺序为左上、右上、右下、左下；
+分开写：
+`border-top-left-radius;`//左上角
+`border-top-right-radius;`//右上角
+`border-bottom-right-radius;`//右下角
+`border-bottom-left-radius;`//左下角
+</code></pre><ol>
+<li><p>过渡属性 transition<br> 适用于所有元素，包含伪元素before和after。设置的时候，要写上：<br> <code>*,::before,::after { transition: all 2s 3s; }</code></p>
+<ul>
+<li>transition-property: background-color,height,border;//过渡的属性，支持连写。基本上所有的属性 都支持 过渡。<br>//如果我们想要为不同的过渡属性 指定不同的过渡时间,延迟时间，就只能使用这种分开的写法</li>
+<li>transition-duration: 2s,5s;//过渡持续的时间,支持连写</li>
+<li>transition-delay: 0s,2s;//延迟时间，支持连写</li>
+<li><p>transition-timing-function: linear;//线型</p>
+<p>  设置速度<br>  支持的速度设置选项 有几种<br>  ease<br>  ease-in<br>  ease-out<br>  ease-in-out<br>  linear<br>  实际开发中 我们不会用过渡 去做很长时间 效果<br>  对于 时间很短的 过渡效果 直接不设置 使用默认的 ease 即可<br>  用户 肉眼是看不出来的</p>
+</li>
+<li>复合写法<br>如果是所有属性,都支持过渡,那么 直接写一个all即可.<br>transition: all 2s 3s;//所有的属性 都支持过渡 时间为2s 延迟3s钟<br>如果在默认的状态下添加，那么hover开始以及结束都会触发；<br>如果在hover中添加，则只有hover的状态下应用该样式 ,鼠标离开之后，立刻还原；</li>
+</ul>
+</li>
+<li>设置颜色<ul>
+<li>rgb(0, 0, 0);//可以继承，不能设置透明度，取值为0-255</li>
+<li>rgba(0, 0, 0, .5);//可以继承，前三个参数取值为0-255，最后一个参数表示透明度，取值0-1</li>
+<li>hsl(296, 90%, 39%);//不可以继承，可以跟rgb互相转换，不能设置透明度</li>
+<li>hsla(296, 90%, 39%, .5);//不可以继承，最后一个参数是设置透明度</li>
+</ul>
+</li>
+<li><p>文字阴影<br> text-shadow();</p>
+<pre><code>文字阴影：
+    阴影的方向 x跟y
+    参数1: x的移动值 正方向是 右;
+    参数2: y的移动值  正方向是 下;
+    参数3: 设置影子的 放大;
+    参数4: 颜色;
+注意: 
+    阴影的颜色 不设置 默认黑色
+    影子的大小 默认是跟 文字一样大
+    如果只想设置文字的放大
+    必须要 将 x 跟y的移动值 进行设置
+    10px red
+    支持过渡
+</code></pre><p> <code>text-shadow: 1px 1px 1px red;</code></p>
+</li>
+<li><p>盒子阴影<br> box-shadow();</p>
+<pre><code>盒子阴影
+    参数0: inset 向内阴影（可选）
+    参数1: x  →向右是正向
+    参数2: y  ↓向下是正向
+    参数3: 模糊的程度;(可选)
+    参数4: 直接放大影子 不会模糊(可选)
+    参数5: 颜色;(可选)
+注意:
+    默认颜色为黑色;
+    支持写 多个影子
+    支持过渡
+    一般影子 就给一丢丢即可 并且是模糊的
+</code></pre><p> <code>box-shadow: 0 20px 20px gray;</code></p>
+</li>
+<li><p>渐变（颜色）</p>
+<ul>
+<li><p>线性渐变 (就是朝着某个方向发生进行渐变)<br>linear-gradient();</p>
+<pre><code>/*语法组合方式 可以添加多个颜色*/
+background-image: linear-gradient(方向,开始颜色 开始位置 ,颜色2 开始位置,颜色3 开始位置.....);
+参数1: 方向
+    1.可以直接写 to 方向
+        to 方向1（方向2 ....）
+    2.可以直接写角度：45deg...
+参数2: 颜色1;
+参数3: 颜色2;
+...可以继续往后写颜色
+</code></pre><p><code>background: linear-gradient(to top,skyblue,white);</code>//自下而上,从skyblue渐渐变为white;<br><code>background: linear-gradient(to top left,skyblue,white);</code>//自右下到左上,颜色从skyblue渐渐变为white;<br><code>background: linear-gradient(45deg,skyblue,hotpink);</code>//方向朝着顺时针45度角,颜色从skublue渐变为hotpink;<br><code>background: linear-gradient(45deg,skyblue,hotpink,purple,orange,yellow);</code>//方向朝着顺时针45度角,颜色从skyblue到hotpink再到purple再到orange再到yellow;<br><code>background-image: linear-gradient(45deg,red 10px,yellow 20px);</code>//朝着 顺时针45度 红色到 10px结束 黄色从 20px开始;<br><code>background-image: linear-gradient(45deg,red 10%,yellow 20%);</code>//朝着 顺时针45度 红色到10%结束 黄色从 20%开始;</p>
+</li>
+<li><p>径向渐变 (以某个点作为圆心,向四周扩散的渐变)<br>radius-gradient()；</p>
+<pre><code>设置的是一个 圆形(椭圆形)的 渐变
+    参数1: 半径;（只设置一个值，得到一个圆；设置两个值，得到椭圆）
+    参数2: 圆的位置;（at center)
+    参数3: 颜色1;
+    参数4: 颜色2;
+    ....
+</code></pre><p><code>background-image: radial-gradient(500px 200px,red,yellow);</code>//<br><code>background-image: radial-gradient(500px 200px at center ,red,yellow);</code>//<br><code>background: radial-gradient(100px 200px,red 10%,green 10%);</code>//横向半径100px  红色10% 绿色20%<br><code>background: radial-gradient(100px 200px,red 10px,green 20px);</code>//横向半径100px  红色10px 绿色 20px</p>
+<pre><code>注意：
+渐变生成的是 图片 不能设置给 backgroundcolor,要设置给background-image;
+background-image: linear-gradient(to top left,skyblue,white);
+    渐变属性 不支持颜色过渡(*)
+        支持 background-position过渡
+        由于是CSS3的样式兼容性 较差
+    目前实际开发中 渐变使用较少
+        主流还是 使用图片
+</code></pre></li>
+</ul>
+</li>
+<li><p>转换 transform<br>如果 使用 多个transform属性编写 下面的会 覆盖上面</p>
+<ul>
+<li><p>平移 translate();</p>
+<pre><code>使用变换的时候
+    可以理解为
+    脱离标准流 浮动流...
+    不影响其他的元素
+移动
+    x的正方向是 →
+    y的正方向是 ↓
+</code></pre><p>  <code>transform: translateX(100px);</code>//分开设置<br>  <code>transform: translateY(100px);</code><br>  <code>transform: translate(100px, 100px);</code>//合写<br>  <code>transform: translateX(100px) translateY(100px);</code>//合写</p>
+</li>
+<li><p>缩放 scale()</p>
+<pre><code>缩放支持两个轴向的缩放:x 跟 y
+scale(0, 0)
+    参数1: x;
+    参数2: y;
+传递的值 不是一个 具体的像素
+而是缩放的比例
+即取值为0-1的小数
+</code></pre><p>  <code>transform: scaleX(.5);</code><br>  <code>transform: scaleY(.5);</code><br>  <code>transform: scaleX(.5) scaleY(.5);</code><br>  <code>transform: scale(.5, .5);</code></p>
+</li>
+<li>旋转 rotate()<br>  默认的旋转中心为盒子的中心，使用transform-origin来设置旋转的中心。<br>  <code>transform-origin: top right;</code><br>  旋转的单位，建议使用deg（度）<br>  <code>transform: rotate(180deg);</code></li>
+<li>扭曲 skew()<br>  参数1: x;<br>  参数2: y;<br>  单位deg（度）<br>  一般情况下，建议给一个参数。两个参数不好控制。<br>  <code>transform: skewX(30deg);</code><br>  <code>transform: skewY(30deg);</code><br>  <code>transform: skew(30deg, 30deg);</code></li>
+</ul>
+</li>
+<li><p>盒子模型 box-sizing</p>
+<pre><code>取值有两个：
+    1.border-box:
+        优先保证 自己所占区域的大小不变
+        设置 border和padding，不会改变自己整体的大小
+        只会把里面的内容缩小，来保证整个盒子的大小不变
+    2.content-box
+        优先保证里面内容区域(content)的大小不变
+        添加border,padding的时候
+        自己整个的会变大，即整个盒子会变大
+默认的是 content-box
+</code></pre></li>
+</ol>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-03-26T12:18:43.000Z" itemprop="datePublished">2015-03-26</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="CSS3" data-title="CSS3学习笔记" data-url="http://yoursite.com/2015/03/26/CSS3/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

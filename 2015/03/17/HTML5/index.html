@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>THML5基础知识 | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      THML5基础知识
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h3 id="THML5基础知识"><a href="#THML5基础知识" class="headerlink" title="THML5基础知识"></a>THML5基础知识</h3><ol>
+<li>HTML5和H5的区别<br> H5包含三个部分：<pre><code>HTML5；
+CSS3;
+JavaScript；
+</code></pre></li>
+<li><p>DOCTYPE的作用<br> 一个标准的<code>HTML</code>文档,开头第一句都应该是<code>&lt;!DOCTYPE&gt;</code>,根据不同的<code>HTML</code>版本,内容上会有差别.<code>DOCTYPE</code>并不是<code>HTML标签</code>,而是一个<code>声明</code>。<br> <strong>作用:</strong> 告诉浏览器编写页面所用的标记的版本. <strong>通俗一点:</strong>高速浏览器按照什么来解析页面。<br> DOCTYPE写法_HTML4中<br> 在HTML4.01中有三种DOCTYPE声明，分别是：<br>  <strong>1.HTML 4.01 Strict</strong> <strong>Emmet语法为:</strong> html:4s+<code>tab</code></p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">    <span class="meta">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"&gt;</span></div></pre></td></tr></table></figure>
+<p> <strong>2.HTML 4.01 Transitional</strong> <strong>Emmet语法为:</strong> html:4t <code>tab</code></p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot; </div><div class="line">    &quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;</div></pre></td></tr></table></figure>
+<p> <strong>3.HTML 4.01 Frameset</strong> 没有找到对应的<code>Emmet</code>语法</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Frameset//EN&quot; </div><div class="line">    &quot;http://www.w3.org/TR/html4/frameset.dtd&quot;&gt;</div></pre></td></tr></table></figure>
+<p> DOCTYPE写法_HTML5中<br> <strong>Emmet语法为:</strong>html:5或！<code>tab</code><br> Emmet语法创建文档结构</p>
+</li>
+</ol>
+<pre><code>*   `html:5`或`!`：HTML5文档类型
+*   `html:xt`：XHTML过渡型文档类型
+*   `html:xs`：XHTML严格型文档类型
+*   `html:4t`：HTML4过渡型文档类型
+*   `html:4s`：HTML4严格型文档类型
+</code></pre><ol>
+<li><p>语义标签<br>原来使用div+class的格式<br>htlm5新语义标签：</p>
+<pre><code>header、main、footer、nav、aside、article、section
+</code></pre><p>有兼容性问题，解决办法：</p>
+<ul>
+<li><p><strong>方法1:js代码</strong><br>  在页面中添加创建<code>header</code>标签的代码<br>  修改header的样式,添加<code>display:block</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">    <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="undefined"></span></div><div class="line">    header&#123;</div><div class="line">        height: 100px;</div><div class="line">        background-color: orangered;</div><div class="line">        /*在低版本的ie中,如果想要显示h5的新语义标签,需要设置为block*/</div><div class="line">        display: block;</div><div class="line">    &#125;   </div><div class="line">    <span class="tag">&lt;/<span class="name">style</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="comment">// 使用代码创建header标签</span></div><div class="line">    <span class="built_in">document</span>.createElement(<span class="string">"header"</span>);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>js框架</strong><br>  直接导入js框架,js框架内部干的事情类似于我们刚刚写的js代码,但是处理的逻辑会多一些。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">&lt;!--使用js框架来解决html5新语义标签的方法--&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/html5shiv.min.js"</span>&gt;</span><span class="undefined"></span></div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>优化代码执行–hack写法<br>无论是js,或者js框架都需要执行js代码才能够解决兼容性问题,但是在高版本的浏览器中,那段js代码就没有必要执行了,所以我们通过一个叫做[hack]的方式来减少性能的浪费<br>用法：使用 hack语法 将需要执行的js的代码包裹起来</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    //lte： less than equel</div><div class="line">    <span class="comment">&lt;!--[if lte IE 8]&gt;</span></div><div class="line">    &lt;script&gt;</div><div class="line">        alert("这段js代码执行了");</div><div class="line">    &lt;/script&gt;</div><div class="line">    &lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">&lt;!--在低版本的 ie中 完成 创建 标签的 功能 并且会自动添加上 display block</span></div><div class="line">            有多个的话 也会 自动帮助我们生成</div><div class="line">        --&gt;</div><div class="line">        <span class="comment">&lt;!--使用条件注释 让 下列js文件 只在 低版本的 ie中 导入--&gt;</span></div><div class="line">        <span class="comment">&lt;!--[if lte IE 8]&gt;</span></div><div class="line">            &lt;script src="js/html5shiv.min.js" type="text/javascript" charset="utf-8"&gt;&lt;/script&gt;</div><div class="line">        &lt;![endif]--&gt;</div></pre></td></tr></table></figure>
+</li>
+<li><p>新type属性</p>
+</li>
+</ol>
+<pre><code>color //页面上显示一个颜色选择框
+date //页面上显示一个可以选择日期的框
+number //只能输入数字
+email //键盘会带有\@符号
+search//键盘会有搜索按钮
+tel //键盘会只显示数字
+range //页面上显示一个可拖动的滚动条，可以用来显示进度
+month //显示年和月
+week //显示年和周
+</code></pre><ol>
+<li>新表单属性</li>
+</ol>
+<pre><code>placeholder //输入框中默认显示的文字
+autofocus   //自动获取焦点
+multiple   //上传文件可以多选
+autocomplete //自动完成
+    必须满足两个条件：首先 input 必须有 name属性
+form表单 必须 提交过，点击submit按钮
+pattern //设置正则表达式，规范输入的内容
+required //非空验证
+oninvalid事件，验证失败以后触发
+oninput事件，input内容改变时触发
+setCustomValidity()设置默认提示信息
+</code></pre><ol>
+<li>获取dom元素<br> querySelector()方法 只能找到 匹配的第一个   从上往下找；<br> querySelectorAll(‘li’);返回的是 数组，哪怕只有一个元素 也是 数组；</li>
+<li><p>新表单元素<br> datalist；该元素规定了输入区域的选项列表,可以让用户有一些选项。</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">    <span class="comment">&lt;!--可以指定一些选项</span></div><div class="line">    input 通过list属性关联</div><div class="line">    datalist 需要设置id属性</div><div class="line">    --&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">""</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"tel"</span> <span class="attr">list</span>=<span class="string">"telList"</span> <span class="attr">placeholder</span>=<span class="string">"请输入电话号码"</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">datalist</span> <span class="attr">id</span>=<span class="string">'telList'</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"1888888"</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"1999999"</span>&gt;</span><span class="tag">&lt;/<span class="name">option</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">datalist</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">form</span>&gt;</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>多媒体标签<br> 视频标签：video</p>
+</li>
+</ol>
+<pre><code>    src 指定播放的视频
+    autoplay 自动播放
+    controls 控制器
+    width、height 宽高设置的是 video标签的 大小，内部的视频还是优先考虑自己的缩放，保证观影效果。
+    loop 循环
+    缺点：视频可以直接另存为
+    移动端 使用video标签居多
+    桌面端 使用flash居多
+
+音频标签：audio
+
+
+    src:音频的地址
+    controls:音频播放控制器
+    autoplay:自动播放
+    loop:循环
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">    <span class="tag">&lt;<span class="name">audio</span> <span class="attr">src</span>=<span class="string">"song.ogg"</span> <span class="attr">controls</span>=<span class="string">"controls"</span> <span class="attr">autoplay</span> <span class="attr">loop</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">audio</span>&gt;</span></div></pre></td></tr></table></figure>
+
+兼容问题
+    通过source属性，可以指定多种格式的视频或音频
+    浏览器会从上往下解析，能够播放即开始播放，后面的视频或音频就不考虑了；
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    <span class="tag">&lt;<span class="name">video</span> <span class="attr">controls</span> <span class="attr">autoplay</span> <span class="attr">loop</span> <span class="attr">width</span>=<span class="string">'200px'</span> <span class="attr">height</span>=<span class="string">'300px'</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"movie/movie04.ogg"</span>&gt;</span><span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"movie/movie.mp4"</span>&gt;</span><span class="tag">&lt;/<span class="name">source</span>&gt;</span></div><div class="line">    亲爱的用户,你的浏览器版本太低了,请立刻升级,建议下载谷歌浏览器</div><div class="line">    <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span>&gt;</span>点我,点我.点我<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">video</span>&gt;</span></div></pre></td></tr></table></figure>
+</code></pre><ol>
+<li>class操作<br> classList；通过dom元素获取，返回的是一个对象，里面有多种操作class的方法：</li>
+</ol>
+<pre><code>add 增加class
+remove 移除class。若要移除多个，分别用引号引起来，中间用逗号隔开。
+contains 判断是否存在
+toggle 切换
+</code></pre><ol>
+<li>自定义属性<br>HTML5中 推出了一个 推荐的 数据格式<br>data-*</li>
+</ol>
+<pre><code>data-xxx-xxx-xxx 只要我们需要 可以一直往后写
+实际生成的时候，会去掉 第一个data-
+后面的中间的 - 去掉，字母变为大写。比如：
+data-meat-one ---&gt; meatOne
+属性可以使用大写，但是最终生成的对象，会使用小写字母
+所有通过 data-添加的属性 都保存在 dataset这个属性中
+可以通过.语法获取，也可以通过[]来获取
+</code></pre><ol>
+<li>进度条<br>progress标签和meter标签<br><code>&lt;progress value=&#39;.5&#39;&gt;&lt;/progress&gt;</code><br><code>&lt;meter&gt;&lt;/meter&gt;</code><br>可以使用自定义的方式 保证 页面的显示效果</li>
+</ol>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-03-17T14:03:23.000Z" itemprop="datePublished">2015-03-17</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="HTML5" data-title="THML5基础知识" data-url="http://yoursite.com/2015/03/17/HTML5/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

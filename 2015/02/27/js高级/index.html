@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>js高级 | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      js高级
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h3 id="offset系列"><a href="#offset系列" class="headerlink" title="offset系列"></a>offset系列</h3><ol>
+<li><p>offsetWidth和offsetHeight</p>
+<pre><code>用来得到对象的大小
+</code></pre><p> <strong>offsetHeight</strong>和<strong>style.height</strong>的区别</p>
+<pre><code>demo.style.height只能获取 行内样式 ，如果样式写到了其他地方，甚至根本就没写，便无法获取
+style.height是 字符串（而且带单位） ，offsetHeight是 数值
+demo.style.height可以 设置 行内样式，offsetHeight是只读属性
+</code></pre><p> 因此，一般用demo.offsetHeight来获取某元素的真实宽度/高度，用style.height来设置宽度/高度<br> <strong>offsetHeight的构成</strong></p>
+<pre><code>offsetHeight = height+padding+border；
+offsetWidth = width+padding+border;
+</code></pre><p> 即：<strong>包括</strong> 自身高度 内边距 边框，<strong>不包括</strong> 外边距<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/203640161.jpg" alt="mark"></p>
+</li>
+<li><p>offsetParent<br> 返回该对象距离最近的 <strong>带有定位</strong> 的父级<br> 如果当前元素的所有父级元素都没有定位（position为absolute或relative），offsetParent为body<br> 如果当前元素的父级元素中有定位（position为absolute或relative），offsetParent取最近的那个父级元素<br> 另外注意offsetParent与parentNode的区别parentNode只找自己的上一级（<strong>亲爹</strong>）</p>
+</li>
+<li><p>offsetLeft 和 offsetTop<br> 用来得到对象的位置（注意：没有offsetRight和offsetBottom）<br> <strong>offsetLeft的构成</strong></p>
+<pre><code>到距离自身最近的（带有定位的）父元素的 左侧 的距离；
+如果所有父级都没有定位则以body 为准；
+offsetLeft 是 自身 border 左侧到 父级 padding 左侧（即 父级 border 右侧）的距离；
+</code></pre><p><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/203809114.jpg" alt="mark"><br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/203819930.jpg" alt="mark"></p>
+</li>
+<li><p><strong>offsetLeft</strong>和 <strong>style.left</strong> <strong>的区别</strong></p>
+<pre><code>style.left只能获取行内样式
+offsetLeft 只读 ，style.left可读可写
+offsetLeft是 数值 ，style.left是 字符串 并且有单位px
+如果没有加定位，style.left获取的数值可能是无效的
+最大区别在于offsetLeft以border左上角为基准，style.left以margin左上角为基准
+</code></pre><p> 例如：<code>left:20px; margin:20px;</code><br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/203848874.jpg" alt="mark"></p>
+</li>
+</ol>
+<h3 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h3><ul>
+<li>Math对象常用方法<br>  <code>Math.ceil(x);</code>//天花板函数，向上取整<br>  <code>Math.floor(x);</code>//地板函数，向下取整<br>  <code>Math.round(x);</code>//就近取整，会整体比较，以 .5 为界限，小于的舍，大于的入，等于的，正数入负数舍<br>  <code>Math.abs(x);</code>//取绝对值<br>例：<br>  <code>Math.ceil(1.5);</code>//2<br>  <code>Math.ceil(-1.5);</code>//-1<br>  <code>Math.floor(1.5);</code>//1<br>  <code>Math.floor(-1.5);</code>//-2<br>  <code>Math.round(1.5);</code>//2<br>  <code>Math.round(-1.5);</code>//-1<br>  <code>Math.abs(-1.5);</code>//1.5</li>
+</ul>
+<h3 id="动画原理"><a href="#动画原理" class="headerlink" title="动画原理"></a>动画原理</h3><ol>
+<li><p>动画原理公式<br> 动画原理公式：  <code>leader = leader + step;</code><br> leader表示盒子当前位置<br> step表示步长</p>
+<pre><code>box.style.left = box.offsetLeft + 10 + &quot;px&quot;;
+</code></pre><p> 让setInterval不断执行某个函数修改盒子的位置属性最后就实现了动画的效果</p>
+</li>
+<li><p>动画函数封装<br> 动画函数较为复杂，却又很常用对于这样的函数，我们一般都会进行封装<br> 需求：能够让<strong>任意对象</strong>移动到<strong>指定位置</strong>。</p>
+</li>
+<li><p>动画函数改进<br> 然而封装之后的函数还有很多问题，所以我们要对其进行进一步改进</p>
+<pre><code>判断运动方向
+完善终点检测
+终点清除定时器
+手动设置对象位置到终点
+调用开始先清理定时器，防止多次调用
+</code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//需求：让任意对象移动到指定位置</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">obj, target</span>) </span>&#123;</div><div class="line">        clearInterval(obj.timer);<span class="comment">//防止重复设定定时器 如果有就清掉 如果没有也无所谓</span></div><div class="line">        obj.timer = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> leader = obj.offsetLeft;<span class="comment">//获取用offset</span></div><div class="line">            <span class="keyword">var</span> step = <span class="number">10</span>;</div><div class="line">            step = leader &lt; target ? step : -step;<span class="comment">//往左往右都行</span></div><div class="line">            <span class="keyword">if</span> (<span class="built_in">Math</span>.abs(leader - target) &gt;= <span class="built_in">Math</span>.abs(step)) &#123;<span class="comment">//距离大于步长就可以走</span></div><div class="line">                leader = leader + step;</div><div class="line">                obj.style.left = leader + <span class="string">"px"</span>;<span class="comment">//字符串而且有单位</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                obj.style.left = target + <span class="string">"px"</span>;<span class="comment">//手动放到目标上</span></div><div class="line">                clearInterval(obj.timer);<span class="comment">//到达目标后清理定时器</span></div><div class="line">            &#125;</div><div class="line">        &#125;, <span class="number">15</span>);<span class="comment">//每秒 25帧就有动画效果了 60帧就比较细腻了</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="scroll系列"><a href="#scroll系列" class="headerlink" title="scroll系列"></a>scroll系列</h3><ol>
+<li><strong>scrollHeight</strong> <strong>和scrollWidth</strong><br> 对象内部实际内容的高度/宽度<br> <strong>scrollTop</strong> <strong>和scrollLeft</strong><br> 被卷去部分的 顶部/左侧 到可视区域 顶部/左侧 的距离<br> <img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/203926566.jpg" alt="mark"></li>
+<li><p>页面滚动座标<br> <strong>获取页面滚动座标</strong><br> 页面滚动座标非常常用，但是有很大的兼容性问题，可以合写为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> scrollTop = <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop || <span class="number">0</span>;</div><div class="line"><span class="comment">//window.pageYOffset是主流的浏览器都支持的写法，后面的是专为类似IE6/7/8而准备的，如果获取不到，最后是0；</span></div><div class="line"><span class="keyword">var</span> scrollLeft = <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft || <span class="number">0</span>;</div></pre></td></tr></table></figure>
+<p> <strong>封装自己的scroll()</strong><br> 由于非常常用，每次都写上面那一大堆很麻烦。我们可以封装一个自己的scroll()方法，返回页面滚动座标。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">scroll</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">top</span>: <span class="built_in">window</span>.pageYOffset || <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop || <span class="number">0</span>;</div><div class="line">        left: <span class="built_in">window</span>.pageXOffset || <span class="built_in">document</span>.documentElement.scrollLeft || <span class="built_in">document</span>.body.scrollLeft || <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p> 调用格式：<br> <code>scroll().top;</code>//返回对象被卷去部分的 顶部 到可视区域 顶部 的距离<br> <code>scroll().left</code>//返回对象被卷去部分的 左侧 到可视区域 左侧 的距离</p>
+</li>
+<li>onscroll事件：<strong>每滚动一像素都会触发该事件</strong></li>
+</ol>
+<h3 id="缓动动画"><a href="#缓动动画" class="headerlink" title="缓动动画"></a>缓动动画</h3><ol>
+<li>原理公式<br> 动画公式<pre><code>leader = leader + step
+</code></pre> 匀速动画公式<pre><code>step = 定值
+leader = leader + step
+</code></pre> 缓动动画公式<pre><code>step = ( target - leader ) / 10
+leader = leader + step
+</code></pre></li>
+<li><strong>缓动动画的好处</strong><br> 他的移动是<strong>有尽头</strong>的。不像基础匀速运动那样无限移动。<br> 有非常逼真的缓动效果，实现的动画效果<strong>更细腻</strong>。<br> 如果不清除定时器，物体永远<strong>跟着目标</strong>leader在移动。</li>
+<li>缓动函数封装<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//封装 动画函数 能让任意对象 移动到指定位置</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">obj, target</span>) </span>&#123;</div><div class="line">        clearInterval(obj.timer);<span class="comment">//清理定时器，避免重复调用定时器</span></div><div class="line">        obj.timer = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> leader = obj.offsetLeft;</div><div class="line">            <span class="keyword">var</span> step = (target - leader) / <span class="number">10</span>;</div><div class="line">            step = step &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(step) : <span class="built_in">Math</span>.floor(step);<span class="comment">//step要取整数，且数值上大于等于自己，所以正数向上取整，负数向下取整</span></div><div class="line">            leader = leader + step;</div><div class="line">            obj.style.left = leader + <span class="string">"px"</span>;</div><div class="line">            <span class="keyword">if</span> (leader === target) &#123;</div><div class="line">                clearInterval(obj.timer);</div><div class="line">            &#125;<span class="comment">//当位置等于目标时，清除定时器</span></div><div class="line">        &#125;, <span class="number">15</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="封装缓动框架"><a href="#封装缓动框架" class="headerlink" title="封装缓动框架"></a>封装缓动框架</h3><ol>
+<li><p>封装 获取盒子计算后样式（即最终样式）的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//封装 获取计算后样式属性的兼容函数 能够获取任意对象的任意属性</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">getStyle</span>(<span class="params">obj, attr</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (<span class="built_in">window</span>.getComputedStyle) &#123;<span class="comment">//主流的浏览器支持的方法，W3C规定的</span></div><div class="line">            <span class="keyword">return</span> <span class="built_in">window</span>.getComputedStyle(obj, <span class="literal">null</span>)[attr];</div><div class="line">            <span class="comment">//第二个参数是伪元素，传入null即可</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> obj.currentStyle[attr];<span class="comment">//非主流的IE6/7/8采用的方法</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>访问属性的两种方式<br> <code>div.style.width</code><br> <code>div.style[&quot;width&quot;]</code></p>
+</li>
+<li>封装<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">animate</span>(<span class="params">obj, json, fn</span>) </span>&#123;<span class="comment">//json &#123;attr:target&#125;</span></div><div class="line">        clearInterval(obj.timer);</div><div class="line">        obj.timer = setInterval(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="comment">//定时器肯定要清除 每一个属性都到达了才能清除</span></div><div class="line">        <span class="comment">//假设这一次执行完成后 所有属性都到达了目标值</span></div><div class="line">            <span class="keyword">var</span> flag = <span class="literal">true</span>;</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> k <span class="keyword">in</span> json) &#123;<span class="comment">//json 属性名:属性值 attr:target k:json[k]</span></div><div class="line">                <span class="keyword">if</span> (k === <span class="string">"opacity"</span>) &#123;<span class="comment">//单独处理透明度</span></div><div class="line">                    <span class="comment">//var leader = parseInt(getStyle(obj, k)) || 0;</span></div><div class="line">                    <span class="keyword">var</span> leader = getStyle(obj, k) * <span class="number">100</span>;<span class="comment">//透明度没有单位的 也不用parseInt</span></div><div class="line">                    <span class="comment">//没必要给默认值 也不应该给</span></div><div class="line">                    <span class="keyword">var</span> target = json[k] * <span class="number">100</span>;</div><div class="line">                    <span class="keyword">var</span> step = (target - leader) / <span class="number">10</span>;</div><div class="line">                    step = step &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(step) : <span class="built_in">Math</span>.floor(step);</div><div class="line">                    leader = leader + step;</div><div class="line">                    obj.style[k] = leader / <span class="number">100</span>;</div><div class="line">                    <span class="comment">//之前扩大100倍 现在缩小100倍数 透明度没有单位</span></div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (k === <span class="string">"zIndex"</span>) &#123;<span class="comment">//层级也要特殊处理</span></div><div class="line">                    obj.style.zIndex = json[k];<span class="comment">//层级不需要渐变 直接设置成目标值</span></div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">var</span> leader = <span class="built_in">parseInt</span>(getStyle(obj, k)) || <span class="number">0</span>;</div><div class="line">                    <span class="keyword">var</span> target = json[k];</div><div class="line">                    <span class="keyword">var</span> step = (target - leader) / <span class="number">10</span>;</div><div class="line">                    step = step &gt; <span class="number">0</span> ? <span class="built_in">Math</span>.ceil(step) : <span class="built_in">Math</span>.floor(step);</div><div class="line">                    leader = leader + step;</div><div class="line">                    obj.style[k] = leader + <span class="string">"px"</span>;</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> (leader !== target) &#123;<span class="comment">//当前属性还没有到达目标</span></div><div class="line">                    flag = <span class="literal">false</span>;<span class="comment">//说明假设错了</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> (flag) &#123;<span class="comment">//最后仍然是true 说明都到了</span></div><div class="line">                clearInterval(obj.timer);<span class="comment">//清理定时器</span></div><div class="line">                <span class="keyword">if</span> (fn) &#123;<span class="comment">//如果有才调用</span></div><div class="line">                    fn();<span class="comment">//动画执行完成后 会执行传入的回调函数</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;, <span class="number">15</span>);</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="client系列"><a href="#client系列" class="headerlink" title="client系列"></a>client系列</h3><ol>
+<li><p><strong>clientWidth</strong>和<strong>clientHeight</strong><br> 偏移<code>offsetWidth: width  +  padding  +  border</code><br> 卷曲<code>scrollWidth: width  +  padding</code> //不包含border   指的是内部内容的大小<br> 可视<code>clientWidth: width  +  padding</code> //不包含border<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204001027.jpg" alt="mark"></p>
+</li>
+<li><p><strong>clientTop</strong>和<strong>clientLeft</strong><br> clientTop和clientLeft没什么用<br> 他们就是borderTop和borderLeft（如果有滚动条会包含滚动条的宽度，但谁见过滚动条在顶部或者左侧的？！）<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204014732.jpg" alt="mark"></p>
+</li>
+<li><p>网页可视区宽和高<br> <strong>网页可视区宽高的兼容写法</strong><br> 页面可视区宽高非常常用，但是有很大的兼容性问题，<strong>可以合写为</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> clientWidth = <span class="built_in">window</span>.innerWidth|| <span class="built_in">document</span>.documentElement.clientWidth|| <span class="built_in">document</span>.body.clientWidth|| <span class="number">0</span>;</div></pre></td></tr></table></figure>
+<p> <strong>封装自己的client()</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//封装一个 能够获取网页可视区宽高的兼容函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">client</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">width</span>: <span class="built_in">window</span>.innerWidth || <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth || <span class="number">0</span>,</div><div class="line">        <span class="attr">height</span>: <span class="built_in">window</span>.innerHeight || <span class="built_in">document</span>.documentElement.clientHeight || <span class="built_in">document</span>.body.clientHeight || <span class="number">0</span></div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>体会响应式布局的原理</p>
+<ul>
+<li>当页面宽度 大于 960 像素的时候 页面为红色并显示computer</li>
+<li>当页面宽度 大于 640 小于 960 页面为绿色并显示tablet</li>
+<li>剩下的情况为黄色并显示mobile</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> timer = <span class="literal">null</span>;</div><div class="line">responsive();</div><div class="line"><span class="comment">//onscroll onresize onmousemove事件 执行频率很快</span></div><div class="line"><span class="comment">//如果要执行的是非常消耗资源的代码 并且没必要频率那么大 可以进行节流</span></div><div class="line"><span class="built_in">window</span>.onresize = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    clearTimeout(timer);</div><div class="line">    timer = setTimeout(responsive, <span class="number">500</span>);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">responsive</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">"很消耗资源"</span>);</div><div class="line">    <span class="keyword">if</span> (client().width &gt; <span class="number">960</span>) &#123;<span class="comment">//电脑</span></div><div class="line">        <span class="built_in">document</span>.body.style.backgroundColor = <span class="string">"red"</span>;</div><div class="line">        <span class="built_in">document</span>.body.innerHTML = <span class="string">"computer"</span>;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (client().width &gt; <span class="number">640</span>) &#123;<span class="comment">//平板</span></div><div class="line">        <span class="built_in">document</span>.body.style.backgroundColor = <span class="string">"green"</span>;</div><div class="line">        <span class="built_in">document</span>.body.innerHTML = <span class="string">"tablet"</span>;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">document</span>.body.style.backgroundColor = <span class="string">"yellow"</span>;</div><div class="line">        <span class="built_in">document</span>.body.innerHTML = <span class="string">"moblie"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//封装一个 能够获取网页可视区宽高的兼容函数</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">client</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">width</span>: <span class="built_in">window</span>.innerWidth || <span class="built_in">document</span>.documentElement.clientWidth || <span class="built_in">document</span>.body.clientWidth || <span class="number">0</span>,</div><div class="line">        <span class="attr">height</span>: <span class="built_in">window</span>.innerHeight || <span class="built_in">document</span>.documentElement.clientHeight || <span class="built_in">document</span>.body.clientHeight || <span class="number">0</span></div><div class="line">    &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h3><ol>
+<li>事件<br> oncnlick、onmouseover、onmouseout、onfocus、onblur</li>
+<li><strong>事件对象简介</strong><br> 在触发事件时，会产生一个<strong>事件对象</strong> <strong>event</strong>，这个对象中包含着<strong>与事件有关的信息</strong>。<br> 所有浏览器都支持event对象，但支持的<strong>方式不同</strong>。<pre><code>比如鼠标操作时候，会添加鼠标位置的相关信息到事件对象中。
+</code></pre> 普通浏览器支持 传入参数<br> IE6、7、8 支持 window.event。</li>
+<li><p>事件对象的兼容性写法<br><code>var event = event || window.event;</code><br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204802051.jpg" alt="mark"></p>
+</li>
+<li><p>三个重要坐标</p>
+<ul>
+<li><p><strong>clientX   clientY</strong></p>
+<p>当前窗口的左上角为基准点<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204042249.jpg" alt="mark"></p>
+</li>
+<li><p><strong>screenX  screenY</strong></p>
+<p>当前屏幕的左上角为基准点<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204100187.jpg" alt="mark"></p>
+</li>
+<li><p><strong>pageX    pageY</strong></p>
+<p>以当前文档（即网页）的左上角为基准点<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204115772.jpg" alt="mark"></p>
+<p>IE678不支持pageX和pageY 但是我们可以采取另一种方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> pageY = event.pageY || event.clientY + <span class="built_in">document</span>.documentElement.scrollTop;</div><div class="line"><span class="keyword">var</span> pageX = event.pageX || event.clientX + <span class="built_in">document</span>.documentElement.scrollLeft;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>事件目标</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//兼容IE浏览器的写法</span></div><div class="line"><span class="keyword">var</span> targetId =  event.target ?  event.target.id : event.srcElement.id;</div></pre></td></tr></table></figure>
+</li>
+<li><p>注册事件的三种方式</p>
+<ul>
+<li><p>传统on方式（onclick）</p>
+<p>对同一个事件目标设置两次以上的同样事件，后面的事件会覆盖前面的时间</p>
+</li>
+<li><p>addEventListener(主流浏览器都支持)</p>
+<p>可以给同一个对象的同一个事件注册多个事件处理函数（监听者）,后面不会覆盖前面。</p>
+<p>可以设定捕获或者冒泡。</p>
+</li>
+<li><p>attachEvent(IE6、7、8)</p>
+<p>可以给同一个对象的同一个事件注册多个事件处理函数（监听者）,后面不会覆盖前面。</p>
+<p>可以设定捕获或者冒泡。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//封装 注册事件 的兼容函数</span></div><div class="line"><span class="comment">//1.元素对象 2.事件的名称（传入没有on的字符串） 3.事件处理函数</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">addEvent</span>(<span class="params">element, eventName, listener</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(element.addEventListener) &#123;</div><div class="line">            element.addEventListener(eventName, listener, <span class="literal">false</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(element.attachEvent) &#123;</div><div class="line">            element.attachEvent(<span class="string">"on"</span> + eventName, listener);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            element[<span class="string">"on"</span> + eventName] = listener;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用封装的addEvent函数</span></div><div class="line"><span class="comment">//例如：为btn添加点击事件</span></div><div class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">"呵呵哒"</span>);</div><div class="line">&#125;;</div><div class="line"><span class="comment">//调用函数来实现</span></div><div class="line">addEvent(btn, <span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">"呵呵哒"</span>);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>移除事件的三种方式</p>
+<ul>
+<li><p>on方式</p>
+<p><code>btn.onclick = null;</code></p>
+</li>
+<li><p>removeEventListener</p>
+<p>  如果注册的时候使用的是匿名函数，则无法移除</p>
+</li>
+<li><p>detachEvent</p>
+<p>  如果注册的时候使用的是匿名函数，则无法移除</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//封装 移除事件的兼容方法</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeEvent</span>(<span class="params">element, eventName, listener</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(element.removeEventListener) &#123;</div><div class="line">            element.removeEventListener(eventName, listener, <span class="literal">false</span>);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span>(element.detachEvent) &#123;</div><div class="line">            element.detachEvent(<span class="string">"on"</span> + eventName, listener);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            element[<span class="string">"on"</span> + eventName] = <span class="literal">null</span>;</div><div class="line">        &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//调用removeEvent函数</span></div><div class="line"><span class="comment">//</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    alert(<span class="string">"呵呵哒"</span>);</div><div class="line">&#125;</div><div class="line"><span class="comment">//调用</span></div><div class="line">removeEvent(btn, <span class="string">"click"</span>, fn);</div></pre></td></tr></table></figure>
+<p>  注意：通过innerHTML清空内容的时候和事件相关的函数不会被销毁，仍然遗留在内存中，因此建议使用removeChild来清除</p>
+</li>
+</ul>
+</li>
+<li>事件捕获<br> btn.addEventListener(“click”,handle,true);<br> 最后一个参数为true-事件捕获</li>
+<li><p>事件冒泡<br> 当一个元素上的事件被触发的时候，比如说鼠标点击了一个按钮，同样的事件将会在那个元素的所有祖先元素中被触发。这一过程被称为事件冒泡；这个事件从原始元素开始一直冒泡到DOM树的最上层。<br> btn.addEventListener(element,”click”,false);<br> 最后一个参数为false-事件冒泡<br> 大多数浏览器都支持-推荐使用的方式</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div id=<span class="string">"father"</span>&gt;</div><div class="line">    <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"son"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div><div class="line">&lt;<span class="regexp">/div&gt;</span></div></pre></td></tr></table></figure>
+<pre><code>son--&gt;father--&gt;document.body--&gt;document.documentElement(html)--&gt;document--&gt;window
+</code></pre><p> 事件传播的三个阶段是：</p>
+<ul>
+<li>捕获阶段</li>
+<li>冒泡阶段</li>
+<li>目标阶段<br>事件捕获阶段：事件从最上一级标签开始往下查找，直到捕获到事件目标(target)。<br>事件冒泡阶段：事件从事件目标(target)开始，往上冒泡直到页面的最上一级标签。<br>  注意：不是所有的事件都能冒泡。以下事件不冒泡：blur、focus、load、unload。<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204521904.jpg" alt="mark"></li>
+</ul>
+</li>
+<li><p>阻止事件冒泡</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//兼容IE浏览器的方法</span></div><div class="line"> <span class="keyword">if</span>(event.stopPropagation)&#123;</div><div class="line">        event.stopPropagation();</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">        event.cancelBubble = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>鼠标事件</p>
+<ul>
+<li>mousedown</li>
+<li>mouseup</li>
+<li>mousemove</li>
+<li>mouseover</li>
+<li>mouseout</li>
+<li>click</li>
+<li>dblclick</li>
+</ul>
+</li>
+<li><p>键盘事件</p>
+<ul>
+<li>onkeydown</li>
+<li>onkeypress</li>
+<li>onkeyup</li>
+</ul>
+<blockquote>
+<p>事件对象的属性：</p>
+<p>onkeydown  onkeyup  输出的是键盘码</p>
+<p>onkeypress输出的是ASCII码表</p>
+<p>键盘码中只有数字字母与ASCII码编号相同</p>
+</blockquote>
+</li>
+</ol>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><ol>
+<li>声明和使用<ul>
+<li>通过<strong>构造函数</strong>定义<ul>
+<li>var 变量名= new RegExp(/表达式/);</li>
+</ul>
+</li>
+<li>通过<strong>直接量</strong>定义（简单方便，我们一般用这个）<ul>
+<li>var 变量名= /表达式/;</li>
+</ul>
+</li>
+<li>常用方法，可用于检测传入的字符串是否符合该规则并返回布尔值<ul>
+<li>exp.test(“要检测的字符串”)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>预定义类和转义符<ul>
+<li>预定义类<ul>
+<li>.      [^\n\r]         除了换行和回车之外的任意字符</li>
+<li>\d    [0-9]           数字字符digit</li>
+<li>\D   [^0-9]         非数字字符</li>
+<li>\w   [a-zA-Z0-9<em>]       单词字符(所有的英文字母数字和</em>) word</li>
+<li>\W   [^a-zA-Z0-9_]     非单词字符</li>
+<li>\s     [\f\r\n\t\v]   不可见字符 space</li>
+<li>\S    [^\f\r\n\t\v]  可见字符</li>
+</ul>
+</li>
+<li>转义符<ul>
+<li>\f 表示换页 form feed</li>
+<li>\t 表示水平制表符 table</li>
+<li>\v 表示垂直制表符 vertical table<br><img src="http://olvlhfr9r.bkt.clouddn.com/blog/20170228/204445787.png" alt="mark"><br>| 表示或 或的优先级最低 可以通过()提升优先级</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>字符类<pre><code>简单类[abc] 表示该位置可以出现的字符
+负向类[^abc] 表示该位置不可以出现的字符
+范围类[a-e]  表示该位置可以出现的字符的范围
+组合类[a-xA-E0-9] 范围类的组合
+</code></pre></li>
+<li>边界 量词 括号<br> 边界<pre><code>^ 会匹配行或者字符串的起始位置
+^只有在[]内才表示非  在外边表示开始
+\$ 会匹配行或字符串的结尾位置
+^\$在一起 表示必须是这个（精确匹配）
+</code></pre> 量词<pre><code>&quot;*&quot;  重复零次或更多 x&gt;=0
+&quot;+&quot;  重复一次或更多次 x&gt;=1
+&quot;?&quot;  重复零次或一次  x=(0||1)
+{n}   n次  x=n
+{n,}  重复n次或更多  x&gt;=n
+{n,m} 重复出现的次数比n多但比m少 n&lt;=x&lt;=m
+</code></pre> 括号总结<pre><code>()表示一组
+[]表示一个字符的位置
+{}表示次数
+</code></pre></li>
+<li>常见项目的匹配<br> 常见项目的匹配<strong>网上有很多</strong>（例如搜索常用正则表达式大全），无需记忆，能看懂即可<pre><code>匹配国内电话号码：
+`&lt;pre style=&quot;background:#272822&quot;&gt;/^0\d{2,3}-\d{7,8}$/&lt;/pre&gt;`
+匹配姓名：
+`&lt;pre style=&quot;background:#272822&quot;&gt;/^[\u4e00-\u9fa5]{2,}$/&lt;/pre&gt;`
+匹配腾讯QQ号：
+`&lt;pre style=&quot;background:#272822&quot;&gt;/^[1-9]\d{4,10}$/&lt;/pre&gt;`
+匹配手机号：
+`&lt;pre style=&quot;background:#272822&quot;&gt;/^(13[0-9]|14[57]|15[0-9]|18[0-9])\d{8}$/&lt;/pre&gt;`
+匹配邮箱：
+`&lt;pre style=&quot;background:#272822&quot;&gt;/^\w+([+-.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/&lt;/pre&gt;`
+</code></pre></li>
+<li><p>封装自己的trim方法<br> <strong>replace()  方法</strong><br> <strong>格式:</strong></p>
+<pre><code>字符串对象.replace(正则式或字符串，替换的目标字符)
+</code></pre><p> <strong>返回值:</strong><br> 替换后的新字符串</p>
+<p> <strong>封装自己的trim()方法</strong></p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//使用trim()方法检测用户输入</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">trim</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/^\s+/</span>,<span class="string">""</span>).replace(<span class="regexp">/\s+$/</span>,<span class="string">""</span>);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">trim</span>(<span class="params">str</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/^\s+|\s+$/g</span>,<span class="string">""</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-02-27T12:50:55.000Z" itemprop="datePublished">2015-02-27</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="js高级" data-title="js高级" data-url="http://yoursite.com/2015/02/27/js高级/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    
+    <title>BOM | My Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    
+      <link rel="icon" href="/favicon.png">
+    
+
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <link rel="stylesheet" href="/js/google-code-prettify/tomorrow-night-eighties.min.css">
+
+  </head>
+
+  <body>
+
+<header>
+	<a id="logo" href="javascript:;" title="My Blog"></a>
+<!-- // /*	<img src="/favicon.png" alt="My Blog">*/ -->
+	
+	
+
+	
+		<!--侧边导航栏-->
+		<a id="nav-toggle" href="#"><span></span></a>
+
+<nav>
+	<div class="menu-top-container">
+		<ul id="menu-top" class="menu">
+			
+				
+				<li class="current-menu-item">
+					<a href="http://weibo.com/u/5541165310" target="_blank">Weibo</a>
+				</li>
+			
+		</ul>
+	</div>
+</nav>
+	
+
+</header>
+
+<div class="m-header ">
+	<section id="hero1" class="hero">
+		<div class="inner">
+		</div>
+	</section>
+	
+		<figure class="top-image" data-enable=true></figure>
+	
+</div>
+
+<!--文章列表-->
+<div class="wrapper">
+  
+    <!--文章-->
+<article>
+	
+  
+    <h1 class="post-title" itemprop="name">
+      BOM
+    </h1>
+  
+
+	<div class='post-body mb'>
+		<h1 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h1><pre><code>浏览器对象模型
+</code></pre><h2 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h2><ol>
+<li>window对象是JavaScript中的顶级对象</li>
+<li>所有定义在全局作用域中的变量、函数都会变成window对象的属性和方法</li>
+<li><p>window对象下的属性和方法调用的时候可以省略window</p>
+<p><code>onload()</code>;//窗体加载完成事件（窗体加载完成才执行）</p>
+<p><code>window.open(url,target,param);</code></p>
+</li>
+</ol>
+<ul>
+<li>url 要打开的地址；</li>
+<li>target新窗口的位置；_blank  _self  _parent(父框架)</li>
+<li>param 新窗口的一些设置；</li>
+<li><p>返回值，新窗口的句柄,返回一个窗体对象，可供close()调用；</p>
+<p><code>window.close();</code>  关闭窗口,谁调用就关闭谁</p>
+</li>
+</ul>
+<h3 id="定时器"><a href="#定时器" class="headerlink" title="定时器"></a>定时器</h3><ul>
+<li><p>定时执行</p>
+<p><code>var  timerId  =  setInterval(function(){},delay);</code></p>
+<p><code>clearInterval(timerId);</code><br>//间隔时间执行，不是特别精确</p>
+</li>
+<li><p>延迟执行</p>
+<p><code>var  timerId  =  setTimeout(function(){},delay);</code></p>
+<p>//设置定时器 setTimeout 参数 1回调函数 2延迟时间（单位是毫秒）</p>
+<p>返回值 数字，即定时器的编号</p>
+<p><code>clearTimeout(timerId);</code><br>//清除定时器 参数是数字，即要清除的定时器</p>
+</li>
+</ul>
+<h3 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h3><ul>
+<li><p>window.location<br>– location相当于浏览器地址栏<br>– 可以将url解析成独立的片段</p>
+</li>
+<li><p>location对象的属性<br>– href<br>– <code>location.reload();</code> //重新加载</p>
+</li>
+</ul>
+<h3 id="screen对象"><a href="#screen对象" class="headerlink" title="screen对象"></a>screen对象</h3><h3 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h3><h3 id="history对象"><a href="#history对象" class="headerlink" title="history对象"></a>history对象</h3><ul>
+<li>历史记录管理</li>
+<li>后退<ul>
+<li><code>history.back();</code></li>
+<li><code>history.go(-1)</code></li>
+</ul>
+</li>
+<li>前进<ul>
+<li><code>history.forward();</code></li>
+<li><code>history.go(1);</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="Date对象"><a href="#Date对象" class="headerlink" title="Date对象"></a>Date对象</h2><ul>
+<li><code>var date = new Date();</code> //创建日期对象</li>
+<li><code>date.valueOf();</code> //从1970-1-1 00:00:00:000 到现在的毫秒数</li>
+<li><code>var date2 = Date.now();</code> //直接返回的就是当前时间的毫秒值,IE9+才支持</li>
+<li><code>var date3 = +new Date();</code> // 不支持now的方法</li>
+<li>日期格式化：<ul>
+<li><code>var date = new Date();</code></li>
+<li><code>console.log(date.toDateString());//Sun Nov 06 2016</code></li>
+<li><code>console.log(date.toTimeString());//20:19:19 GMT+0800 (中国标准时间)</code></li>
+<li><code>console.log(date.toLocaleDateString());//2016/11/6</code></li>
+<li><code>console.log(date.toLocaleTimeString());//下午8:19:19</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">date.getYear();<span class="comment">//返回年</span></div><div class="line">date.getMouth();<span class="comment">//返回月份，0-11</span></div><div class="line">date.getDate();<span class="comment">//返回当天是当月的第几天</span></div><div class="line">date.getDay();<span class="comment">//返回星期几， 0-6</span></div><div class="line">date.getHours();<span class="comment">//返回当前时间的小时</span></div><div class="line">date.getMinutes();<span class="comment">//返回当前时间的分钟</span></div><div class="line">date.getSeconds();<span class="comment">//返回当前时间的秒数</span></div><div class="line">date.getMilliseconds();<span class="comment">//返回当前时间的毫秒数</span></div></pre></td></tr></table></figure>
+<p>日期转换：</p>
+<h2 id="基本包装类型"><a href="#基本包装类型" class="headerlink" title="基本包装类型"></a>基本包装类型</h2><ul>
+<li><p>三个特殊的引用类型：String/Number/Boolean</p>
+<p>例：</p>
+<p><code>var  s1  =  &quot;zhangsan&quot;;</code></p>
+<p><code>var  s2  =  s1.substring(5);</code></p>
+<p>s1是基本类型，基本类型是没有方法的</p>
+<p>当调用s1.substring(5)的时候，先把s1包装成String类型的临时对象，再调用substring方法，最后销毁临时对象</p>
+</li>
+</ul>
+<p>相当于：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  s1  =  <span class="keyword">new</span>  <span class="built_in">String</span>(<span class="string">"zhangsan"</span>);</div><div class="line"><span class="keyword">var</span>  s2  =  s1.substring(<span class="number">5</span>);</div><div class="line">s1  =  <span class="literal">null</span>;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>注意：Number和Boolean基本不用，而且会引起歧义</p>
+</blockquote>
+<p>创建基本包装类型的对象：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span>  num  =  <span class="number">18</span>;  <span class="comment">//数值，基本类型</span></div><div class="line"><span class="keyword">var</span>  num  =  <span class="built_in">Number</span>(<span class="string">"18"</span>);  <span class="comment">//类型转换，基本类型</span></div><div class="line"><span class="keyword">var</span>  num  =  <span class="keyword">new</span>  <span class="built_in">Number</span>(<span class="number">18</span>);  <span class="comment">//基本包装类型，对象</span></div><div class="line"><span class="comment">//**new会改变this的指向，并返回**</span></div></pre></td></tr></table></figure></p>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h3><ul>
+<li>String类型是字符串的包装类型，提供给我们很多操作字符串的方法<br><code>var  strObj  =  new  String(&quot;hello  world&quot;);</code></li>
+<li>对象有方法和属性<ul>
+<li>属性：<br>length返回当前字符串总共多少字符</li>
+<li>方法：<br>注意：字符串中所有的方法都不会改变字符串本身，操作完成后会返回一个新的字符串。<ol>
+<li>字符方法<ul>
+<li><code>charAt();</code>    //获取指定位置处字符</li>
+<li><code>charCodeAt();</code>  //获取指定位置处字符的ASCII码</li>
+<li><code>str[0];</code>   //ES5，IE8+支持 和charAt()等效</li>
+</ul>
+</li>
+<li>操作方法<ul>
+<li><code>concat();</code>   //拼接字符串，和+一样</li>
+<li><code>slice();</code>     //从start位置开始，截取到end位置，end取不到</li>
+<li><code>substring();</code>  //从start位置开始，截取到end位置，end取不到</li>
+<li><code>substr();</code>    //从start位置开始，截取length个字符</li>
+</ul>
+</li>
+<li>位置方法<ul>
+<li><code>indexOf();</code>   //返回指定内容在元字符串中的位置。如果没有，则返回-1；</li>
+<li><code>lastIndexOf();</code>  //从后往前找，只找第一个匹配的。没有则返回-1；</li>
+</ul>
+</li>
+<li>其他方法<ul>
+<li><code>trim()；</code>  //只能去除字符串前后的空白</li>
+<li><code>split()；</code>  //把字符串切割成字符数组，参数是什么，就以什么来分割；</li>
+</ul>
+</li>
+<li>大小写转换方法<ul>
+<li><code>to(Locale)UpperCase();</code>  //转换大写</li>
+<li><code>to(Locale)LowerCase();</code>  //转换小写</li>
+</ul>
+</li>
+<li>匹配方法<ul>
+<li><code>search();</code></li>
+<li><code>replace();</code>//从左往右找，找到一个替换后就返回</li>
+</ul>
+</li>
+<li><ul>
+<li><code>localeCompare();</code>  //两个字符串比较的是ASCII码</li>
+<li><code>s1.localeCompare(s2);</code><ul>
+<li>s1  &gt;  s2 返回正数，一般是1</li>
+<li>s1  ==  s2 返回0</li>
+<li>s1  &lt;  s2  返回负数，一般是-1</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>fromCharCode()<ul>
+<li><code>String.fromCharCode(101,102,103);</code> //把ASCII码转换成字符串.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+	</div>
+	<div class="meta split">
+		
+			<span>本文总阅读量 <span id="busuanzi_value_page_pv"></span> 次</span>
+		
+		<time class="post-date" datetime="2015-03-09T11:10:35.000Z" itemprop="datePublished">2015-03-09</time>
+	</div>
+</article>
+
+<!--评论-->
+
+	
+<div class="ds-thread" data-thread-key="BOM" data-title="BOM" data-url="http://yoursite.com/2015/03/09/BOM/"></div>
+<script type="text/javascript">
+
+var duoshuoQuery = {short_name:"yumemor"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0]
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+</script>
+
+
+  
+</div>
+
+
+  <svg id="bigTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+    <path d="M0 0 L50 100 L100 0 Z"></path>
+  </svg>
+
+  
+
+
+  <div class="wrapper"></div>
+
+
+
+
+
+<div class="fat-footer">
+	<div class="wrapper">
+		<div class="layout layout--center">
+			<div class="layout__item palm-mb">
+				<div class="media">
+					<img class="headimg" src='/yx.png' alt='lowkey'>
+					<div class="media__body">
+						<h4>My Blog</h4>
+						<p class='site-description'>null</p>
+					</div>
+				</div>
+				<div class="author-contact">
+					<ul>
+						
+							
+							<li>
+				        		<a href="http://weibo.com/u/5541165310" target="_blank">
+				        			
+				        				<i class="iconfont icon-weibo"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://github.com/wangyx6226" target="_blank">
+				        			
+				        				<i class="iconfont icon-github"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+							
+							<li>
+				        		<a href="https://www.zhihu.com/" target="_blank">
+				        			
+										<i class="iconfont icon-zhihu"></i>
+				        			
+				        		</a>
+				        	</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<footer class="footer" role="contentinfo">
+	<div class="wrapper wrapper--wide split split--responsive">
+		
+			<span>本站总访问量 <span id="busuanzi_value_site_pv"></span> 次, 访客数 <span id="busuanzi_value_site_uv"></span> 人次</span>
+		
+	</div>
+</footer>
+
+	<!-－这里导入了 lib.js 里面涵盖了 jQuery 等框架 所以注释掉-->
+	<!--<script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>-->
+	<script src="/js/lib.js"></script>
+	<script src="/js/google-code-prettify/prettify.js"></script>
+	<script src="/js/module.js"></script>
+	<script src="/js/script.js"></script>
+	
+		<script async src="http://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script type='text/javascript'>
+		//代码高亮
+		$(document).ready(function(){
+	 		$('pre').addClass('prettyprint linenums').attr('style', 'overflow:auto;');
+   			prettyPrint();
+		});
+	</script>
+	</body>
+</html>
